@@ -30,7 +30,7 @@ export default class ClassesController {
 
         const schedules = await db('class_schedule')
         .join('classes','classes.id','=','class_schedule.class_id')
-        .join('proffy','proffy_id','=','classes.proffy_id')
+        .join('proffy','proffy.id','=','classes.proffy_id')
         .where('proffy.account_id','=',accountId)
         .select('class_schedule.*')
 
@@ -50,6 +50,7 @@ export default class ClassesController {
                 schedule
             }
         })
+        console.log(schedules)
         return res.status(200).json(serializedProffys)
     }
 

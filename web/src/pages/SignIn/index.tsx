@@ -17,21 +17,10 @@ function Login(){
     const [email,setEmail] = useState('')
     const [password,setPassword] = useState('')
 
-    useEffect(()=>{
-        const emailInStorage = localStorage.getItem('email')
-        const passwordInStorage = localStorage.getItem('password')
-
-        if(emailInStorage && passwordInStorage){
-            setEmail(JSON.parse(emailInStorage))
-            setPassword(JSON.parse(passwordInStorage))
-        }
-    },[])
-
     async function handleSignIn(event: FormEvent) {
         event.preventDefault()
         const data = {email,password}
-        const verifyChecked:any = document.getElementById('lembrar')
-        await signIn(data, verifyChecked.checked)
+        await signIn(data)
     }
 
     return(
@@ -45,10 +34,10 @@ function Login(){
                     <div className="login">
                         <form onSubmit={handleSignIn}>
                             <h2>Fazer login</h2>
-                            <Input label="" name="email" type="email" placeholder="E-mail" value={email} onChange={e=>{setEmail(e.target.value)}}/>
+                            <Input label="" name="email" type="email" placeholder="E-mail" onChange={e=>{setEmail(e.target.value)}}/>
 
                             <div className="imgpswd">
-                                <Input label="" name="password" type={isPasswordVisible ? 'password' : 'text'} placeholder="Senha" value={password} onChange={e=>{setPassword(e.target.value)}}/>
+                                <Input label="" name="password" type={isPasswordVisible ? 'password' : 'text'} placeholder="Senha" onChange={e=>{setPassword(e.target.value)}}/>
                                 <img className="show" src={EyeIcon} alt="Coração roxo" onClick={(e)=>{setIsPasswordVisible(!isPasswordVisible)}}/>
                             </div>
 

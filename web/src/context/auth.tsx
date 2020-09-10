@@ -5,7 +5,7 @@ import Loading from '../components/Loading'
 interface AuthContextData {
     signed: boolean
     account: object | null
-    signIn(data: any, checked: Boolean): Promise<void>
+    signIn(data: any): Promise<void>
     signOut(): void
 }
 
@@ -23,15 +23,11 @@ const AuthProvider: React.FC = ({children}) => {
         setLoading(false)
     },[])
 
-    async function signIn(data: any, checked: Boolean){
+    async function signIn(data: any){
         setLoading(true)
         try{
             const response:any = await apiPost('sign-in',data)
             if(response.status === 200){
-                if(checked){
-                    localStorage.setItem('email', JSON.stringify(data.email))
-                    localStorage.setItem('password', JSON.stringify(data.password))
-                }
                 localStorage.setItem('token', JSON.stringify(response.data.metadata.token))
                 localStorage.setItem('username', JSON.stringify(response.data.account[0].name +" "+ response.data.account[0].surname))
                 setAccount(response.data.account)
@@ -45,8 +41,6 @@ const AuthProvider: React.FC = ({children}) => {
     }
 
     function signOut(){
-        localStorage.removeItem('token')
-        localStorage.removeItem('username')
         setAccount(null)
     }
 
