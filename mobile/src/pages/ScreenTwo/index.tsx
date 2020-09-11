@@ -5,6 +5,7 @@ import {RectButton} from 'react-native-gesture-handler'
 import styles from './styles'
 
 import bgImage from '../../assets/images/give-classes-background.png'
+import Icon from '../../assets/images/icons/give-classes.png'
 
 function ScreenTwo() {
     const {navigate} = useNavigation()
@@ -22,7 +23,9 @@ function ScreenTwo() {
         <View style={styles.container}>
             <View style={styles.top}>
             	<ImageBackground resizeMode="contain" source={bgImage} style={styles.top}>
-                
+                    <View style={styles.image}>
+                        <Image source={Icon}/>
+                    </View>
             	</ImageBackground>
             </View>
 

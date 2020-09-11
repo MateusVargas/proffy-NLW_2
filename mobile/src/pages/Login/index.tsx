@@ -5,7 +5,6 @@ import {RectButton} from 'react-native-gesture-handler'
 import styles from './styles'
 
 import bgImage from '../../assets/images/give-classes-background.png'
-import LogoImage from '../../assets/images/logo.png'
 
 function Login() {
     const {navigate} = useNavigation()
@@ -16,7 +15,11 @@ function Login() {
     },[])
 
     function goToSignUpPages() {
-        navigate('ScreenTwo')
+        navigate('SignUpStep1')
+    }
+
+    function goToHomePage(){
+        navigate('Landing')
     }
 
     return(
@@ -31,7 +34,11 @@ function Login() {
             <View style={styles.bottom}>
                 <View style={styles.header}>
             	    <Text style={styles.textLogin}>Fazer login</Text>
-            	    <Text style={styles.textAccount}>Criar uma conta</Text>
+            	    <Text 
+                        onPress={goToSignUpPages}
+                        style={styles.textAccount}>
+                        Criar uma conta
+                    </Text>
                 </View>
 
                 <View style={styles.fields}>
@@ -58,7 +65,7 @@ function Login() {
                 </View>
 
                 <View style={styles.buttonView}>
-                	<RectButton onPress={goToSignUpPages} style={styles.button}>
+                	<RectButton onPress={goToHomePage} style={styles.button}>
                         <Text style={styles.buttonText}>Entrar</Text>
                     </RectButton>
                 </View>

@@ -7,7 +7,11 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     top: {
-        flex: 1
+        flex: 1,
+        justifyContent: 'center',
+    },
+    image: {
+        alignItems: 'center',
     },
     bottom: {
         flex: 1,
