@@ -3,13 +3,23 @@ import {StyleSheet} from 'react-native'
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        justifyContent: 'center'
+    },
+    top: {
+        flex: 1,
         backgroundColor: '#8257E5',
-        justifyContent: 'center',
         padding: 40
     },
     banner: {
         width: '100%',
         resizeMode: 'contain'//redimensiona conforme altura e largura, deixando visível toda a foto
+    },
+
+
+    actions: {
+        flex: 1,
+        backgroundColor: '#fff',
+        padding: 40
     },
     title: {
         fontFamily: 'Poppins_400Regular',
