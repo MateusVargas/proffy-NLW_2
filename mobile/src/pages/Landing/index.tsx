@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { View, Image, Text } from 'react-native'
+import { View, Image, Text, TouchableOpacity } from 'react-native'
 import {useNavigation} from '@react-navigation/native'
 import {RectButton} from 'react-native-gesture-handler'
 import styles from './styles'
@@ -29,6 +29,12 @@ function Landing() {
     return(
         <View style={styles.container}>
             <View style={styles.top}>
+                <View style={styles.topbar}>
+                    <Text style={{color: '#fff'}}>user</Text>
+                    <TouchableOpacity>
+                        <Text style={{color: '#fff'}}>Sair</Text>
+                    </TouchableOpacity>
+                </View>
                 <Image source={landingImg} style={styles.banner}/>
             </View>
             
@@ -49,11 +55,12 @@ function Landing() {
                     </RectButton>
                 </View>
 
-                <Text style={styles.totalConnections}>
-                    Total de {totalConnections} conexões já realizadas {' '}
-                    <Image source={heartIcon}/>
-                </Text>
+                    <Text style={styles.totalConnections}>
+                        Total de {totalConnections} conexões já realizadas {' '}
+                        <Image source={heartIcon}/>
+                    </Text>
             </View>
+            
         </View>
     )
 }

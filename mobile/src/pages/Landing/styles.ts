@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     top: {
-        flex: 1,
+        flex: 2,
         backgroundColor: '#8257E5',
         padding: 40
     },
@@ -14,30 +14,33 @@ const styles = StyleSheet.create({
         width: '100%',
         resizeMode: 'contain'//redimensiona conforme altura e largura, deixando visível toda a foto
     },
-
+    topbar: {
+        justifyContent: 'space-between',
+        flexDirection: 'row'
+    },
 
     actions: {
-        flex: 1,
+        flex: 3,
         backgroundColor: '#fff',
-        padding: 40
+        padding: 30
     },
     title: {
         fontFamily: 'Poppins_400Regular',
-        color: '#FFF',
+        color: '#8257E5',
         fontSize: 20,
         lineHeight: 30,
-        marginTop: 20//80
+        marginTop: 10//80
     },
     titleBold: {
         fontFamily: 'Poppins_600SemiBold'
     },
     buttonsContainer: {
         flexDirection: 'row',
-        marginTop: 40,
+        marginTop: 30,
         justifyContent: 'space-between'
     },
     button: {
-        height: 150,
+        height: 130,
         width: '48%',
         backgroundColor: '#333',
         borderRadius: 8,
@@ -58,10 +61,10 @@ const styles = StyleSheet.create({
     totalConnections: {
         fontFamily: 'Poppins_400Regular',
         color: '#d4c2ff',
-        fontSize: 12,
+        fontSize: 14,
         lineHeight: 20,
-        marginTop: 40,
-        maxWidth: 140
+        marginTop: 30,
+        maxWidth: 200
     }
 })
 export default styles
