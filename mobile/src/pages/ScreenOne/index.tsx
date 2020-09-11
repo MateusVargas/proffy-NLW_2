@@ -14,7 +14,7 @@ function ScreenOne() {
         
     },[])
 
-    function goToStudyPages() {
+    function goToScrennTwoPage() {
         navigate('ScreenTwo')
     }
 
@@ -31,7 +31,7 @@ function ScreenOne() {
             	<Text style={styles.text}>
             		Encontre vários professores para ensinar você
             	</Text>
-            	<RectButton onPress={goToStudyPages} style={styles.button}>
+            	<RectButton onPress={goToScrennTwoPage} style={styles.button}>
                     <Text style={styles.buttonText}>Próximo</Text>
                 </RectButton>
             </View>

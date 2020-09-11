@@ -14,8 +14,8 @@ function ScreenTwo() {
         
     },[])
 
-    function goToStudyPages() {
-        navigate('Study')
+    function goToLoginPage() {
+        navigate('Login')
     }
 
     return(
@@ -31,7 +31,7 @@ function ScreenTwo() {
             	<Text style={styles.text}>
                     Ou dê aulas sobre o que você mais conhece
             	</Text>
-            	<RectButton style={styles.button}>
+            	<RectButton onPress={goToLoginPage} style={styles.button}>
                     <Text style={styles.buttonText}>VAMOS LÁ!</Text>
                 </RectButton>
             </View>
