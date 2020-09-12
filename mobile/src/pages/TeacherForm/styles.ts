@@ -51,6 +51,9 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         backgroundColor: '#fff'
     },
+    schedules: {
+        marginBottom: 25,
+    },
     inlineButtons:{
         flexDirection: 'row',
         justifyContent: 'space-between'
@@ -60,14 +63,21 @@ const styles = StyleSheet.create({
         width: '47%',
         backgroundColor: '#fff',
         borderColor: '#ddd',
-        marginBottom: 20,
+        marginBottom: 10,
         borderWidth: 1,
         borderRadius: 8,
         justifyContent: 'center',
         paddingHorizontal: 20
     },
-
-
+    newHour: {
+        fontFamily: 'Poppins_400Regular',
+        color: '#8257e5'
+    },
+    removeHour: {
+        fontFamily: 'Poppins_400Regular',
+        textAlign: 'center',
+        color: 'red'
+    },
 
 
     buttonView: {

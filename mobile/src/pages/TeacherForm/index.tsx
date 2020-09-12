@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { View, Image, Text, ScrollView, ImageBackground, TextInput, CheckBox, Platform, KeyboardAvoidingView } from 'react-native'
+import { View, Image, Text, ScrollView, ImageBackground, TextInput, TouchableOpacity, CheckBox, Platform, KeyboardAvoidingView } from 'react-native'
 import {useNavigation} from '@react-navigation/native'
 import {RectButton, BorderlessButton} from 'react-native-gesture-handler'
 import PageHeader from '../../components/PageHeader'
@@ -11,11 +11,27 @@ import {Feather} from '@expo/vector-icons'
 function TeacherForm(){
 
     const {navigate} = useNavigation()
+
+    const [schedules, setSchedule] = useState([
+       {week_day: 0, from: '', to: ''}
+    ])
     
 
     useEffect(()=>{
         
     },[])
+
+    function addSchedule(){
+        setSchedule([
+            ...schedules,
+            {week_day: 0, from: '', to: ''}
+        ])
+    }
+
+    function removeSchedule(schedule: any){
+        const filteredSchedules = schedules.filter(sc=>sc !== schedule)
+        setSchedule(filteredSchedules)
+    }
 
     function goToSuccessPage() {
         navigate('Success',{
@@ -90,27 +106,44 @@ function TeacherForm(){
                         />
 
                         <Text style={styles.formTitle}>Horários disponíveis</Text>
-                        
+                        <TouchableOpacity onPress={addSchedule}>
+                            <Text style={styles.newHour}>
+                                + Novo horário
+                            </Text>
+                        </TouchableOpacity>
                         <View style={styles.line}/>
 
-                        <TextInput 
-                            placeholderTextColor="#c1bccc"
-                            style={styles.input}
-                            placeholder="Dia da semana"
-                        />
+                        {schedules.map((schedule,index)=>{
+                        return(
+                            <View key={schedule.week_day} style={styles.schedules}>
+                                <TextInput 
+                                    placeholderTextColor="#c1bccc"
+                                    style={styles.input}
+                                    placeholder="Dia da semana"
+                                />
 
-                        <View style={styles.inlineButtons}>
-                            <TextInput 
-                                placeholderTextColor="#c1bccc"
-                                style={styles.inlineInput}
-                                placeholder="De"
-                            />
-                            <TextInput 
-                                placeholderTextColor="#c1bccc"
-                                style={styles.inlineInput}
-                                placeholder="Até"
-                            />
-                        </View>
+                                <View style={styles.inlineButtons}>
+                                    <TextInput 
+                                        placeholderTextColor="#c1bccc"
+                                        style={styles.inlineInput}
+                                        placeholder="De"
+                                    />
+                                    <TextInput 
+                                        placeholderTextColor="#c1bccc"
+                                        style={styles.inlineInput}
+                                        placeholder="Até"
+                                    />
+                                </View>
+
+                                <TouchableOpacity onPress={e=>{removeSchedule(schedule)}}>
+                                    <Text style={styles.removeHour}>
+                                        Excluir horário
+                                    </Text>
+                                </TouchableOpacity>
+
+                            </View>
+                            )
+                        })}
 
                         <View style={styles.buttonView}>
                             <RectButton onPress={goToSuccessPage} style={styles.button}>
