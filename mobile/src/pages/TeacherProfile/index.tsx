@@ -16,16 +16,8 @@ function Profile() {
         
     },[])
 
-    function goToSignUpPages() {
-        navigate('SignUpStep1')
-    }
-
-    function goToHomePage(){
-        navigate('Landing')
-    }
-
-    function goToRecoveryPassword(){
-        navigate('RecoveryPassword')
+    function goToFormPage() {
+        navigate('TeacherForm')
     }
 
     return(
@@ -119,7 +111,7 @@ function Profile() {
                         </View>
 
                         <View style={styles.buttonView}>
-                            <RectButton style={styles.button}>
+                            <RectButton onPress={goToFormPage} style={styles.button}>
                                 <Text style={styles.buttonText}>Salvar alterações</Text>
                             </RectButton>
                         </View>

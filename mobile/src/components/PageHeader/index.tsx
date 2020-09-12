@@ -15,10 +15,11 @@ interface PageHeaderProps{
         subject: string | null, 
         avatar: string,
         name: string
-    };
+    }
+    description?: string
 }
 
-const PageHeader: React.FC<PageHeaderProps> = ({ title, topBarTitle, headerRight, profileData, children }) => {
+const PageHeader: React.FC<PageHeaderProps> = ({ title, description, topBarTitle, headerRight, profileData, children }) => {
 
     const {navigate} = useNavigation()
     
@@ -47,7 +48,13 @@ const PageHeader: React.FC<PageHeaderProps> = ({ title, topBarTitle, headerRight
             
             <View style={profileData ? {justifyContent:'center',flexDirection: 'row',
         alignItems: 'center'} : styles.header}>
-                <Text style={styles.title}>{title}</Text>
+                <View style={styles.info}>
+                    <Text style={styles.title}>{title}</Text>
+                    {description && 
+                        <Text style={styles.description}>{description}</Text>
+                    }
+                </View>
+
                 {headerRight}
                 {profileData && 
                     <View style={styles.profileData}>

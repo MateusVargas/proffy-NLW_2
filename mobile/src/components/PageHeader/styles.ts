@@ -15,14 +15,23 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontSize: 14
     },
+    info:{
+        flexDirection: 'column'
+    },
     title:{
         fontFamily: 'Archivo_700Bold',
         color: '#FFF',
         fontSize: 24,
         lineHeight: 24,
-        maxWidth: 160,
-        marginVertical: 40,
+        maxWidth: 230,
+        marginVertical: 20,
         marginTop: 20
+    },
+    description:{
+        fontFamily: 'Poppins_400Regular',
+        color: '#fff',
+        fontSize: 12,
+        maxWidth: 300
     },
     header:{
         flexDirection: 'row',

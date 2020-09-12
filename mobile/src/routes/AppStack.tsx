@@ -17,7 +17,8 @@ import SuccessSignUp from '../pages/SignUp/success'
 import Landing from '../pages/Landing'
 import GiveClasses from '../pages/GiveClasses'
 import StudyTabs from './StudyTabs'
-import Profile from '../pages/Profile'
+import Profile from '../pages/TeacherProfile'
+import TeacherForm from '../pages/TeacherForm'
 
 const { Navigator, Screen } = createStackNavigator()
 
@@ -36,6 +37,7 @@ function AppStack(){
                 <Screen name="GiveClasses" component={GiveClasses}/>
                 <Screen name="Study" component={StudyTabs}/>
                 <Screen name="Profile" component={Profile}/>
+                <Screen name="TeacherForm" component={TeacherForm}/>
             </Navigator>
         </NavigationContainer>
     )
