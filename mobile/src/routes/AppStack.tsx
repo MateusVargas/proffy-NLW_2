@@ -4,13 +4,20 @@ import {createStackNavigator} from '@react-navigation/stack'
 
 import ScreenOne from '../pages/ScreenOne'
 import ScreenTwo from '../pages/ScreenTwo'
+
 import Login from '../pages/Login'
+
 import SignUpStep1 from '../pages/SignUp/step1'
 import SignUpStep2 from '../pages/SignUp/step2'
+
+import RecoveryPassword from '../pages/RecoveryPassword'
+
 import SuccessSignUp from '../pages/SignUp/success'
+
 import Landing from '../pages/Landing'
 import GiveClasses from '../pages/GiveClasses'
 import StudyTabs from './StudyTabs'
+import Profile from '../pages/Profile'
 
 const { Navigator, Screen } = createStackNavigator()
 
@@ -23,10 +30,12 @@ function AppStack(){
                 <Screen name="Login" component={Login}/>
                 <Screen name="SignUpStep1" component={SignUpStep1}/>
                 <Screen name="SignUpStep2" component={SignUpStep2}/>
+                <Screen name="RecoveryPassword" component={RecoveryPassword}/>
                 <Screen name="SuccessSignUp" component={SuccessSignUp}/>
                 <Screen name="Landing" component={Landing}/>
                 <Screen name="GiveClasses" component={GiveClasses}/>
                 <Screen name="Study" component={StudyTabs}/>
+                <Screen name="Profile" component={Profile}/>
             </Navigator>
         </NavigationContainer>
     )

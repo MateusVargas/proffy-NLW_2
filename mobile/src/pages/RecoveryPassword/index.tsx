@@ -1,0 +1,68 @@
+import React, { useEffect, useState } from 'react'
+import { View, Image, Text, ImageBackground, TextInput, Platform, KeyboardAvoidingView } from 'react-native'
+import {useNavigation} from '@react-navigation/native'
+import {RectButton} from 'react-native-gesture-handler'
+import {BorderlessButton} from 'react-native-gesture-handler'
+import styles from './styles'
+
+import bgImage from '../../assets/images/give-classes-background.png'
+import backIcon from '../../assets/images/icons/back.png'
+
+function RecoveryPassword() {
+    const {navigate} = useNavigation()
+    
+
+    useEffect(()=>{
+        
+    },[])
+
+    function goToLoginPage(){
+        navigate('Login')
+    }
+
+    function handleGoBack() {
+        navigate('Login')
+    }
+
+    return(
+        <View style={styles.container}>
+            <View style={styles.top}>
+            	<ImageBackground resizeMode="contain" source={bgImage} style={styles.top}>
+                    <Text style={styles.textTop}>Sua plataforma de estudos online.</Text>
+            	</ImageBackground>
+            </View>
+
+
+            <View style={styles.bottom}>
+            <View style={styles.backButton}>
+                    <BorderlessButton onPress={handleGoBack}>
+                        <Image source={backIcon} style={{tintColor: '#202024'}} resizeMode="contain"/>
+                    </BorderlessButton>
+</View>
+                <View style={styles.header}>
+            	    <Text style={styles.textBig}>Esqueceu sua senha?</Text>
+            	    <Text 
+                        style={styles.textSmall}>
+                        Não esquenta, {'\n'}
+                        vamos dar um jeito nisso.
+                    </Text>
+                </View>
+
+                <View style={styles.fields}>
+                    <TextInput 
+                        placeholderTextColor="#c1bccc"
+                        style={styles.input}
+                        placeholder="E-mail"
+                    />
+                </View>
+
+                <View style={styles.buttonView}>
+                	<RectButton onPress={goToLoginPage} style={styles.button}>
+                        <Text style={styles.buttonText}>Enviar</Text>
+                    </RectButton>
+                </View>
+            </View>
+        </View>
+    )
+}
+export default RecoveryPassword

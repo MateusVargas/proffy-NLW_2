@@ -59,6 +59,7 @@ function TeacherList(){
         <View style={styles.container}>
             <PageHeader 
                 title="Proffys disponíveis" 
+                topBarTitle="Estudar"
                 headerRight={(
                     <BorderlessButton onPress={handleToggleFiltersVisible}>
                         <Feather name="filter" size={20} color="#fff"/>

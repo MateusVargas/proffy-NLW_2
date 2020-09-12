@@ -22,6 +22,10 @@ function Login() {
         navigate('Landing')
     }
 
+    function goToRecoveryPassword(){
+        navigate('RecoveryPassword')
+    }
+
     return(
         <View style={styles.container}>
             <View style={styles.top}>
@@ -59,7 +63,7 @@ function Login() {
                         <CheckBox/>
                         <Text style={styles.textOptions}>Lembrar-me</Text>
                     </View>
-                    <Text style={styles.textOptions}>
+                    <Text onPress={goToRecoveryPassword} style={styles.textOptions}>
                         Esqueci minha senha
                     </Text>
                 </View>

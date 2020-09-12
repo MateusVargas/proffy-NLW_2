@@ -9,8 +9,11 @@ import bgImage from '../../assets/images/give-classes-background.png'
 function GiveClasses(){
 
     const {goBack} = useNavigation()
+    const {navigate} = useNavigation()
 
-
+    function profile(){
+        navigate('Profile')
+    }
 
     return(
         <View style={styles.container}>
@@ -19,7 +22,7 @@ function GiveClasses(){
                 <Text style={styles.description}>Para começar, você precisa se cadastrar como profesor na nossa plataforma web.</Text>
             </ImageBackground>
 
-            <RectButton onPress={goBack} style={styles.okButton}>
+            <RectButton onPress={profile} style={styles.okButton}>
                 <Text style={styles.okButtonText}>Tudo bem</Text>
             </RectButton>
         </View>
