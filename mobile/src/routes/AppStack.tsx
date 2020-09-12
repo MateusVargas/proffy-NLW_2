@@ -12,13 +12,14 @@ import SignUpStep2 from '../pages/SignUp/step2'
 
 import RecoveryPassword from '../pages/RecoveryPassword'
 
-import SuccessSignUp from '../pages/SignUp/success'
-
 import Landing from '../pages/Landing'
 import GiveClasses from '../pages/GiveClasses'
 import StudyTabs from './StudyTabs'
 import Profile from '../pages/TeacherProfile'
 import TeacherForm from '../pages/TeacherForm'
+
+import Success from '../pages/SuccessPage'
+
 
 const { Navigator, Screen } = createStackNavigator()
 
@@ -32,12 +33,12 @@ function AppStack(){
                 <Screen name="SignUpStep1" component={SignUpStep1}/>
                 <Screen name="SignUpStep2" component={SignUpStep2}/>
                 <Screen name="RecoveryPassword" component={RecoveryPassword}/>
-                <Screen name="SuccessSignUp" component={SuccessSignUp}/>
                 <Screen name="Landing" component={Landing}/>
                 <Screen name="GiveClasses" component={GiveClasses}/>
                 <Screen name="Study" component={StudyTabs}/>
                 <Screen name="Profile" component={Profile}/>
                 <Screen name="TeacherForm" component={TeacherForm}/>
+                <Screen name="Success" component={Success}/>
             </Navigator>
         </NavigationContainer>
     )

@@ -16,12 +16,16 @@ function RecoveryPassword() {
         
     },[])
 
-    function goToLoginPage(){
+    function handleGoBack() {
         navigate('SignIn')
     }
 
-    function handleGoBack() {
-        navigate('SignIn')
+    function goToSuccessPage() {
+        navigate('Success',{
+            title: 'Redefinição enviada!',
+            description: 'Boa, agora é só checar o e-mail que foi enviado para você redefinir sua senha e aproveitar os estudos.',
+            buttonText: 'Voltar ao login',
+        })
     }
 
     return(
@@ -38,7 +42,7 @@ function RecoveryPassword() {
                     <BorderlessButton onPress={handleGoBack}>
                         <Image source={backIcon} style={{tintColor: '#202024'}} resizeMode="contain"/>
                     </BorderlessButton>
-</View>
+             </View>
                 <View style={styles.header}>
             	    <Text style={styles.textBig}>Esqueceu sua senha?</Text>
             	    <Text 
@@ -57,7 +61,7 @@ function RecoveryPassword() {
                 </View>
 
                 <View style={styles.buttonView}>
-                	<RectButton onPress={goToLoginPage} style={styles.button}>
+                	<RectButton onPress={goToSuccessPage} style={styles.button}>
                         <Text style={styles.buttonText}>Enviar</Text>
                     </RectButton>
                 </View>

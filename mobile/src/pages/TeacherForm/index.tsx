@@ -17,8 +17,12 @@ function TeacherForm(){
         
     },[])
 
-    function goToFormPage() {
-        navigate('TeacherForm')
+    function goToSuccessPage() {
+        navigate('Success',{
+            title: 'Cadastro Salvo!',
+            description: 'Tudo certo, seu cadastro está na nossa lista de professores. Agora é só ficar de olho no seu WhatsApp',
+            buttonText: 'Fazer login',
+        })
     }
 
     return(
@@ -109,7 +113,7 @@ function TeacherForm(){
                         </View>
 
                         <View style={styles.buttonView}>
-                            <RectButton onPress={goToFormPage} style={styles.button}>
+                            <RectButton onPress={goToSuccessPage} style={styles.button}>
                                 <Text style={styles.buttonText}>Salvar alterações</Text>
                             </RectButton>
                         </View>
