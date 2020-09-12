@@ -103,7 +103,7 @@ function SignUpStep1() {
     },[])
 
     function handleGoBack() {
-        navigate('Login')
+        navigate('SignIn')
     }
 
     function goToStep2Page() {

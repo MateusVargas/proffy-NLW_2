@@ -6,7 +6,7 @@ import styles from './styles'
 
 import bgImage from '../../assets/images/give-classes-background.png'
 
-function Login() {
+function SignIn() {
     const {navigate} = useNavigation()
     
 
@@ -77,4 +77,4 @@ function Login() {
         </View>
     )
 }
-export default Login
+export default SignIn

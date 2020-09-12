@@ -17,11 +17,11 @@ function RecoveryPassword() {
     },[])
 
     function goToLoginPage(){
-        navigate('Login')
+        navigate('SignIn')
     }
 
     function handleGoBack() {
-        navigate('Login')
+        navigate('SignIn')
     }
 
     return(

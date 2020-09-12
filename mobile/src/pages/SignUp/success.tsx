@@ -70,7 +70,7 @@ function SuccessSignUp() {
     }
 
     function goToLoginPage() {
-        navigate('Login')
+        navigate('SignIn')
     }
 
     return(
