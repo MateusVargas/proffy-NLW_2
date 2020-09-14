@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { View, Image, Text, ScrollView, ImageBackground, TextInput, TouchableOpacity, CheckBox, Platform, KeyboardAvoidingView } from 'react-native'
+import { View, Image, Text, ScrollView, ImageBackground, Picker, TextInput, TouchableOpacity, CheckBox, Platform, KeyboardAvoidingView } from 'react-native'
 import {useNavigation} from '@react-navigation/native'
 import {RectButton, BorderlessButton} from 'react-native-gesture-handler'
 import PageHeader from '../../components/PageHeader'
@@ -15,6 +15,7 @@ function TeacherForm(){
     const [schedules, setSchedule] = useState([
        {week_day: 0, from: '', to: ''}
     ])
+    const [selectedDay, setSelectedDay] = useState('1')
     
 
     useEffect(()=>{
@@ -143,10 +144,19 @@ function TeacherForm(){
                                     <Text style={styles.containerFieldText}>
                                         Dia da semana
                                     </Text>
-                                    <TextInput 
-                                        placeholderTextColor="#c1bccc"
+                                    <Picker
+                                        selectedValue={selectedDay}
+                                        onValueChange={(day,index)=>setSelectedDay(day)}
                                         style={styles.input}
-                                    />
+                                    >
+                                        <Picker.Item label="Domingo" value="0"/>
+                                        <Picker.Item label="Segunda-feira" value="1"/>
+                                        <Picker.Item label="Terça-feira" value="2"/>
+                                        <Picker.Item label="Quarta-feira" value="3"/>
+                                        <Picker.Item label="Quinta-feira" value="4"/>
+                                        <Picker.Item label="Sexta-feira" value="5"/>
+                                        <Picker.Item label="Sábado" value="6"/>
+                                    </Picker>
                                 </View>
 
                                 <View style={styles.containerInline}>
@@ -169,11 +179,17 @@ function TeacherForm(){
                                     </View>
                                 </View>
 
-                                <TouchableOpacity onPress={e=>{removeSchedule(schedule)}}>
-                                    <Text style={styles.removeHour}>
-                                        Excluir horário
-                                    </Text>
-                                </TouchableOpacity>
+                                <View style={{flexDirection:'row',alignItems:'center'}}>
+                                    <View style={{flex:1,height:2,backgroundColor:'red'}}/>
+                                        <View style={{marginLeft:5,marginRight:5}}>
+                                            <TouchableOpacity onPress={e=>{removeSchedule(schedule)}}>
+                                                <Text style={styles.removeHour}>
+                                                    Excluir horário
+                                                </Text>
+                                            </TouchableOpacity>
+                                        </View>
+                                    <View style={{flex:1,height:2,backgroundColor:'red'}}/>
+                                </View>
 
                             </View>
                             )
