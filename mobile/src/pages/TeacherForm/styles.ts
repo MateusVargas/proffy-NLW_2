@@ -23,6 +23,19 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         marginTop: 15,
     },
+    containerField: {
+        flexDirection: 'column',
+        marginBottom: 4
+    },
+    containerFieldText: {
+        fontFamily: 'Poppins_400Regular',
+        fontSize: 15,
+        marginBottom: 3,
+        color: 'gray'
+    },
+    
+
+
     line:{
         borderWidth: 1,
         borderColor:'#f0f0f7',
@@ -54,13 +67,20 @@ const styles = StyleSheet.create({
     schedules: {
         marginBottom: 25,
     },
-    inlineButtons:{
+
+
+
+    containerInline: {
         flexDirection: 'row',
         justifyContent: 'space-between'
     },
+    containerInlineArea:{
+        flexDirection: 'column',
+        width: '47%'
+    },
     inlineInput:{
         height: 50,
-        width: '47%',
+        width: '100%',
         backgroundColor: '#fff',
         borderColor: '#ddd',
         marginBottom: 10,

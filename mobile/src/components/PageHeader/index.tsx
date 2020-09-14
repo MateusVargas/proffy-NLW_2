@@ -58,7 +58,7 @@ const PageHeader: React.FC<PageHeaderProps> = ({ title, description, topBarTitle
                 {headerRight}
                 {profileData && 
                     <View style={styles.profileData}>
-                        <Text style={styles.avatar}>{profileData.avatar}</Text>
+                        <Image source={{uri:profileData.avatar}} resizeMode="contain" style={styles.avatar}/>
                         <Text style={styles.name}>{profileData.name}</Text>
                         <Text style={styles.subject}>{profileData.subject}</Text>
                     </View>

@@ -26,7 +26,7 @@ function Profile() {
                 topBarTitle="Meu perfil"
                 profileData={{
                     subject: 'Geografia',
-                    avatar: 'foto',
+                    avatar: 'https://avatars1.githubusercontent.com/u/50881853?s=460&u=66d473275230b8374d5a1856f17996fcd4b13400&v=4',
                     name: 'joao'
                 }}
             />
@@ -44,70 +44,86 @@ function Profile() {
 
                         <View style={styles.line}/>
 
-                        <TextInput 
-                            placeholderTextColor="#c1bccc"
-                            style={styles.input}
-                            placeholder="Nome"
-                        />
-                        <TextInput
-                            placeholderTextColor="#c1bccc"
-                            style={styles.input}
-                            placeholder="Sobrenome"
-                        />
-                        <TextInput 
-                            placeholderTextColor="#c1bccc"
-                            style={styles.input}
-                            placeholder="E-mail"
-                        />
-                        <TextInput 
-                            placeholderTextColor="#c1bccc"
-                            style={styles.input}
-                            placeholder="Whatsapp"
-                        />
-                        <TextInput
-                            multiline={true}
-                            numberOfLines={15} 
-                            placeholderTextColor="#c1bccc"
-                            style={styles.textarea}
-                            placeholder="Bio"
-                        />
+                        <View style={styles.containerField}>
+                            <Text style={styles.containerFieldText}>
+                                Whatsapp
+                            </Text>
+                            <TextInput 
+                                placeholderTextColor="#c1bccc"
+                                style={styles.input}
+                            />
+                        </View>
+
+                        <View style={styles.containerField}>
+                            <Text style={styles.containerFieldText}>
+                                Bio
+                            </Text>
+                            <TextInput
+                                multiline={true}
+                                numberOfLines={15} 
+                                placeholderTextColor="#c1bccc"
+                                style={styles.textarea}
+                            />
+                        </View>
 
                         <Text style={styles.formTitle}>Sobre a aula</Text>
                         
                         <View style={styles.line}/>
 
-                        <TextInput 
-                            placeholderTextColor="#c1bccc"
-                            style={styles.input}
-                            placeholder="Matéria"
-                        />
-                        <TextInput 
-                            placeholderTextColor="#c1bccc"
-                            style={styles.input}
-                            placeholder="Custo da sua hora por aula"
-                        />
+                        <View style={styles.containerField}>
+                            <Text style={styles.containerFieldText}>
+                                Matéria
+                            </Text>
+                            <TextInput 
+                                placeholderTextColor="#c1bccc"
+                                style={styles.input}
+                            />
+                        </View>
+
+                        <View style={styles.containerField}>
+                            <Text style={styles.containerFieldText}>
+                                Custo da sua hora por aula
+                            </Text>
+                            <TextInput 
+                                placeholderTextColor="#c1bccc"
+                                style={styles.input}
+                            />
+                        </View>
 
                         <Text style={styles.formTitle}>Horários disponíveis</Text>
                         
                         <View style={styles.line}/>
 
-                        <TextInput 
-                            placeholderTextColor="#c1bccc"
-                            style={styles.input}
-                            placeholder="Dia da semana"
-                        />
+                        <View style={styles.containerField}>
+                            <Text style={styles.containerFieldText}>
+                                Dia da semana
+                            </Text>
+                            <TextInput 
+                                placeholderTextColor="#c1bccc"
+                                style={styles.input}
+                            />
+                        </View>
 
-                        <View style={styles.inlineButtons}>
-                            <TextInput 
-                                placeholderTextColor="#c1bccc"
-                                style={styles.inlineInput}
-                                placeholder="De"
-                            />
-                            <TextInput 
-                                placeholderTextColor="#c1bccc"
-                                style={styles.inlineInput}
-                                placeholder="Até"
-                            />
+
+                        <View style={styles.containerInline}>
+                            <View style={styles.containerInlineArea}>
+                                <Text style={styles.containerFieldText}>
+                                    De
+                                </Text>
+                                <TextInput 
+                                    placeholderTextColor="#c1bccc" 
+                                    style={styles.inlineInput}                                           style={styles.inlineInput}
+                                />
+                            </View>
+                                <View style={styles.containerInlineArea}>
+                                <Text style={styles.containerFieldText}>
+                                    Até
+                                </Text>
+                                <TextInput 
+                                    placeholderTextColor="#c1bccc"
+                                    style={styles.inlineInput}
+                                />
+                            </View>
                         </View>
 
                         <View style={styles.buttonView}>

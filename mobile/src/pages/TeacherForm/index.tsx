@@ -62,48 +62,71 @@ function TeacherForm(){
 
                         <View style={styles.line}/>
 
-                        <TextInput 
-                            placeholderTextColor="#c1bccc"
-                            style={styles.input}
-                            placeholder="Nome"
-                        />
-                        <TextInput
-                            placeholderTextColor="#c1bccc"
-                            style={styles.input}
-                            placeholder="Sobrenome"
-                        />
-                        <TextInput 
-                            placeholderTextColor="#c1bccc"
-                            style={styles.input}
-                            placeholder="E-mail"
-                        />
-                        <TextInput 
-                            placeholderTextColor="#c1bccc"
-                            style={styles.input}
-                            placeholder="Whatsapp"
-                        />
-                        <TextInput
-                            multiline={true}
-                            numberOfLines={15} 
-                            placeholderTextColor="#c1bccc"
-                            style={styles.textarea}
-                            placeholder="Bio"
-                        />
+                        <View style={styles.containerField}>
+                            <Text style={styles.containerFieldText}>
+                                Nome
+                            </Text>
+                            <TextInput 
+                                placeholderTextColor="#c1bccc"
+                                style={styles.input}
+                            />
+                        </View>
+
+                        <View style={styles.containerField}>
+                            <Text style={styles.containerFieldText}>
+                                Avatar
+                            </Text>
+                            <TextInput 
+                                placeholderTextColor="#c1bccc"
+                                style={styles.input}
+                            />
+                        </View>
+
+                        <View style={styles.containerField}>
+                            <Text style={styles.containerFieldText}>
+                                Whatsapp
+                            </Text>
+                            <TextInput 
+                                placeholderTextColor="#c1bccc"
+                                style={styles.input}
+                            />
+                        </View>
+
+                        <View style={styles.containerField}>
+                            <Text style={styles.containerFieldText}>
+                                Bio
+                            </Text>
+                            <TextInput
+                                multiline={true}
+                                numberOfLines={15} 
+                                placeholderTextColor="#c1bccc"
+                                style={styles.textarea}
+                            />
+                        </View>
 
                         <Text style={styles.formTitle}>Sobre a aula</Text>
                         
                         <View style={styles.line}/>
 
-                        <TextInput 
-                            placeholderTextColor="#c1bccc"
-                            style={styles.input}
-                            placeholder="Matéria"
-                        />
-                        <TextInput 
-                            placeholderTextColor="#c1bccc"
-                            style={styles.input}
-                            placeholder="Custo da sua hora por aula"
-                        />
+                        <View style={styles.containerField}>
+                            <Text style={styles.containerFieldText}>
+                                Matéria
+                            </Text>
+                            <TextInput 
+                                placeholderTextColor="#c1bccc"
+                                style={styles.input}
+                            />
+                        </View>
+
+                        <View style={styles.containerField}>
+                            <Text style={styles.containerFieldText}>
+                                Custo da sua hora por aula
+                            </Text>
+                            <TextInput 
+                                placeholderTextColor="#c1bccc"
+                                style={styles.input}
+                            />
+                        </View>
 
                         <Text style={styles.formTitle}>Horários disponíveis</Text>
                         <TouchableOpacity onPress={addSchedule}>
@@ -116,23 +139,34 @@ function TeacherForm(){
                         {schedules.map((schedule,index)=>{
                         return(
                             <View key={schedule.week_day} style={styles.schedules}>
-                                <TextInput 
-                                    placeholderTextColor="#c1bccc"
-                                    style={styles.input}
-                                    placeholder="Dia da semana"
-                                />
+                                <View style={styles.containerField}>
+                                    <Text style={styles.containerFieldText}>
+                                        Dia da semana
+                                    </Text>
+                                    <TextInput 
+                                        placeholderTextColor="#c1bccc"
+                                        style={styles.input}
+                                    />
+                                </View>
 
-                                <View style={styles.inlineButtons}>
-                                    <TextInput 
-                                        placeholderTextColor="#c1bccc"
-                                        style={styles.inlineInput}
-                                        placeholder="De"
-                                    />
-                                    <TextInput 
-                                        placeholderTextColor="#c1bccc"
-                                        style={styles.inlineInput}
-                                        placeholder="Até"
-                                    />
+                                <View style={styles.containerInline}>
+                                    <View style={styles.containerInlineArea}>
+                                        <Text style={styles.containerFieldText}>
+                                            De
+                                        </Text>
+                                        <TextInput 
+                                            placeholderTextColor="#c1bccc"                                            style={styles.inlineInput}
+                                        />
+                                    </View>
+                                    <View style={styles.containerInlineArea}>
+                                        <Text style={styles.containerFieldText}>
+                                            Até
+                                        </Text>
+                                        <TextInput 
+                                            placeholderTextColor="#c1bccc"
+                                            style={styles.inlineInput}
+                                        />
+                                    </View>
                                 </View>
 
                                 <TouchableOpacity onPress={e=>{removeSchedule(schedule)}}>

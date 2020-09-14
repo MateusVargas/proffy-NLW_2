@@ -56,7 +56,9 @@ const styles = StyleSheet.create({
         fontSize: 12
     },
     avatar: {
-
+        width: 120,
+        height: 120,
+        borderRadius: 150
     }
 })
 export default styles
