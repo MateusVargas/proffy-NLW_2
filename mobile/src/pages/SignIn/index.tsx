@@ -2,13 +2,19 @@ import React, { useEffect, useState } from 'react'
 import { View, Image, Text, ImageBackground, TextInput, CheckBox, Platform, KeyboardAvoidingView } from 'react-native'
 import {useNavigation} from '@react-navigation/native'
 import {RectButton} from 'react-native-gesture-handler'
+
 import styles from './styles'
 
 import bgImage from '../../assets/images/give-classes-background.png'
 
+import { useAuth } from '../../contexts/auth'
+
+
 function SignIn() {
     const {navigate} = useNavigation()
     
+    const { signed, signIn } = useAuth()
+    console.log(signed)
 
     useEffect(()=>{
         
@@ -18,8 +24,9 @@ function SignIn() {
         navigate('SignUpStep1')
     }
 
-    function goToHomePage(){
-        navigate('Landing')
+    async function goToHomePage(){
+        //navigate('Landing')
+        await signIn()
     }
 
     function goToRecoveryPassword(){

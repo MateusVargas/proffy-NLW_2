@@ -10,14 +10,22 @@ import giveClassesIcon from '../../assets/images/icons/give-classes.png'
 import heartIcon from '../../assets/images/icons/heart.png'
 import api from '../../services/api'
 
+import { useAuth } from '../../contexts/auth'
+
 function Landing() {
     const {navigate} = useNavigation()
+
+    const { signOut, user } = useAuth()
     
     const [totalConnections,setTotalConnections] = useState(0)
 
     useEffect(()=>{
         api.get('/connections').then(resp => setTotalConnections(resp.data.total))
     },[])
+
+    async function handleSignOut(){
+        await signOut()
+    }
 
     function goToGiveClasses(){
         navigate('GiveClasses')
@@ -30,8 +38,8 @@ function Landing() {
         <View style={styles.container}>
             <View style={styles.top}>
                 <View style={styles.topbar}>
-                    <Text style={{color: '#fff'}}>user</Text>
-                    <TouchableOpacity>
+                    <Text style={{color: '#fff'}}>{user?.name}</Text>
+                    <TouchableOpacity onPress={handleSignOut}>
                         <Text style={{color: '#fff'}}>Sair</Text>
                     </TouchableOpacity>
                 </View>
