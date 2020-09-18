@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { View, Image, StyleSheet, Text, TextInput, CheckBox, Platform, KeyboardAvoidingView } from 'react-native'
+import React, { useState } from 'react'
+import { View, Image, StyleSheet, Text, TextInput, CheckBox, Alert, Platform, KeyboardAvoidingView } from 'react-native'
 import {useNavigation} from '@react-navigation/native'
 import {RectButton} from 'react-native-gesture-handler'
 import {BorderlessButton} from 'react-native-gesture-handler'
@@ -101,21 +101,25 @@ function SignUpStep1() {
         name: '',
         surname: ''
     })
-    
-
-    useEffect(()=>{
-        
-    },[])
 
     function handleGoBack() {
         navigate('SignIn')
     }
 
     function goToStep2Page() {
-        navigate('SignUpStep2',{
-            name: formData.name,
-            surname: formData.surname
-        })
+        if(formData.name.trim().length === 0){
+            Alert.alert('Nome é obrigatório')
+            return
+        }
+        else if(formData.surname.trim().length === 0){
+            Alert.alert('Sobrenome é obrigatório')
+        }
+        else{
+            navigate('SignUpStep2',{
+                name: formData.name,
+                surname: formData.surname
+            })
+        }
     }
 
     return(
@@ -143,6 +147,7 @@ function SignUpStep1() {
                         value={formData.name}
                         onChangeText={value=>setFormData({...formData, name: value})}
                         placeholder="Nome"
+                        autoCapitalize="words"
                     />
                     <TextInput 
                         placeholderTextColor="#c1bccc"
@@ -150,6 +155,7 @@ function SignUpStep1() {
                         value={formData.surname}
                         onChangeText={value=>setFormData({...formData, surname: value})}
                         placeholder="Sobrenome"
+                        autoCapitalize="words"
                     />
                 </View>
 

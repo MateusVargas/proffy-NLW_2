@@ -16,7 +16,12 @@ export default class AccountsController{
         const token = generateJwt({id: account[0].id})
         const metadata = {token}
 
-        return res.status(200).json({account,metadata})
+        return res.status(200).json({account:{
+            id: account[0].id,
+            name: account[0].name,
+            surname: account[0].surname,
+            email: account[0].email
+        },metadata})
     }
 
     async signup(req: Request, res: Response){

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { View, Image, StyleSheet, Text, TextInput, CheckBox, Platform, KeyboardAvoidingView } from 'react-native'
+import React, { useState } from 'react'
+import { View, Image, StyleSheet, Text, TextInput, CheckBox, Alert, Platform, KeyboardAvoidingView } from 'react-native'
 import {useNavigation} from '@react-navigation/native'
 import {RectButton} from 'react-native-gesture-handler'
 import {BorderlessButton} from 'react-native-gesture-handler'
@@ -90,29 +90,34 @@ function SignUpStep2() {
         password: ''
     })
 
-    useEffect(()=>{
-        
-    },[])
-
     function handleGoBack() {
         navigate('SignUpStep1')
     }
 
     async function handleSignUp() {
-        const data = {
-            name: routeParams.params.name,
-            surname: routeParams.params.surname,
-            email: formData.email,
-            password: formData.password
+        if(formData.email.trim().length === 0){
+            Alert.alert('E-mail é obrigatório')
+            return
         }
-        const response = await api.post('/sign-up',data)
-        
-        if(response.status === 201){
-            navigate('Success',{
-                title: 'Cadastro concluído',
-                description: 'Agora você faz parte da plataforma da Proffy',
-                buttonText: 'Fazer login'
-            })
+        else if(formData.password.trim().length < 4){
+            Alert.alert('Senha é obrigatória')
+        }
+        else{
+            const data = {
+                name: routeParams.params.name,
+                surname: routeParams.params.surname,
+                email: formData.email,
+                password: formData.password
+            }
+            const response = await api.post('/sign-up',data)
+          
+            if(response.status === 201){
+                navigate('Success',{
+                    title: 'Cadastro concluído',
+                    description: 'Agora você faz parte da plataforma da Proffy',
+                    buttonText: 'Fazer login'
+                })
+            }
         }
     }
 
@@ -143,6 +148,7 @@ function SignUpStep2() {
                         value={formData.password}
                         onChangeText={value=>setFormData({...formData, password: value})}
                         placeholder="Senha"
+                        secureTextEntry={true}
                     />
                 </View>
 

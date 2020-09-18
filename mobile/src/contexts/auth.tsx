@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useState, useContext } from 'react'
-import { AsyncStorage } from 'react-native'
+import { AsyncStorage, Alert } from 'react-native'
 
 import * as auth from '../services'
 import api from '../services/api'
@@ -7,6 +7,7 @@ import api from '../services/api'
 interface User{
     id: number
     name: string
+    surname: string
     email: string
 }
 
@@ -44,26 +45,16 @@ export const AuthProvider: React.FC = ({children}) => {
             setLoading(true)
             const response = await api.post('/sign-in',data)
             if(response.status === 200){
-                setUser({
-                    id: response.data.account.id,
-                    name: response.data.account.name,
-                    email: response.data.account.email
-                })
-                //await AsyncStorage.setItem('user',JSON.stringify(response.data.account.id))
+                setUser(response.data.account)
+                await AsyncStorage.setItem('user',JSON.stringify(response.data.account))
                 await AsyncStorage.setItem('token',response.data.metadata.token)
                 api.defaults.headers.Authorization = `Bearer ${response.data.metadata.token}`  
             }
             setLoading(false)
         }catch(error){
-            console.log(error)
+            Alert.alert('Usuário ou senha incorretos')
             setLoading(false)
         }
-       // setUser(response.user)
-
-        //await AsyncStorage.setItem('user',JSON.stringify(response.user))
-        //await AsyncStorage.setItem('token',response.token)
-
-       // api.defaults.headers.Authorization = `Bearer ${response.token}`
     }
 
     function signOut(){

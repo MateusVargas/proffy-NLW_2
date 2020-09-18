@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { View, Image, Text, ImageBackground, TextInput, CheckBox, Platform, KeyboardAvoidingView } from 'react-native'
 import {useNavigation} from '@react-navigation/native'
 import {RectButton} from 'react-native-gesture-handler'
@@ -19,11 +19,6 @@ function SignIn() {
     })
 
     const { signed, signIn } = useAuth()
-
-
-    useEffect(()=>{
-        
-    },[])
 
     function goToSignUpPages() {
         navigate('SignUpStep1')
@@ -74,6 +69,7 @@ function SignIn() {
                             value={formData.password}
                             onChangeText={value=>setFormData({...formData, password: value})}
                             placeholder="Senha"
+                            secureTextEntry={true}
                         />
                 </View>
 
