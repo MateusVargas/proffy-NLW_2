@@ -13,8 +13,13 @@ import { useAuth } from '../../contexts/auth'
 function SignIn() {
     const {navigate} = useNavigation()
     
+    const [formData, setFormData] = useState({
+       email: '',
+       password: ''
+    })
+
     const { signed, signIn } = useAuth()
-    console.log(signed)
+
 
     useEffect(()=>{
         
@@ -24,9 +29,12 @@ function SignIn() {
         navigate('SignUpStep1')
     }
 
-    async function goToHomePage(){
-        //navigate('Landing')
-        await signIn()
+    async function handleSignIn(){
+        const data = {
+            email: formData.email,
+            password: formData.password
+        }
+        await signIn(data)
     }
 
     function goToRecoveryPassword(){
@@ -56,11 +64,15 @@ function SignIn() {
                     <TextInput 
                             placeholderTextColor="#c1bccc"
                             style={styles.input}
+                            value={formData.email}
+                            onChangeText={value=>setFormData({...formData, email: value})}
                             placeholder="E-mail"
                         />
                     <TextInput 
                             placeholderTextColor="#c1bccc"
                             style={styles.input}
+                            value={formData.password}
+                            onChangeText={value=>setFormData({...formData, password: value})}
                             placeholder="Senha"
                         />
                 </View>
@@ -76,7 +88,7 @@ function SignIn() {
                 </View>
 
                 <View style={styles.buttonView}>
-                	<RectButton onPress={goToHomePage} style={styles.button}>
+                	<RectButton onPress={handleSignIn} style={styles.button}>
                         <Text style={styles.buttonText}>Entrar</Text>
                     </RectButton>
                 </View>

@@ -6,6 +6,10 @@ import {BorderlessButton} from 'react-native-gesture-handler'
 
 import backIcon from '../../assets/images/icons/back.png'
 
+import {useRoute} from '@react-navigation/native'
+import api from '../../services/api'
+
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -78,7 +82,13 @@ const styles = StyleSheet.create({
 
 function SignUpStep2() {
     const {navigate} = useNavigation()
-    
+
+    const routeParams:any = useRoute()
+
+    const [formData, setFormData] = useState({
+        email: '',
+        password: ''
+    })
 
     useEffect(()=>{
         
@@ -88,12 +98,22 @@ function SignUpStep2() {
         navigate('SignUpStep1')
     }
 
-    function goToSuccessPage() {
-        navigate('Success',{
-            title: 'Cadastro concluído',
-            description: 'Agora você faz parte da plataforma da Proffy',
-            buttonText: 'Fazer login'
-        })
+    async function handleSignUp() {
+        const data = {
+            name: routeParams.params.name,
+            surname: routeParams.params.surname,
+            email: formData.email,
+            password: formData.password
+        }
+        const response = await api.post('/sign-up',data)
+        
+        if(response.status === 201){
+            navigate('Success',{
+                title: 'Cadastro concluído',
+                description: 'Agora você faz parte da plataforma da Proffy',
+                buttonText: 'Fazer login'
+            })
+        }
     }
 
     return(
@@ -113,17 +133,21 @@ function SignUpStep2() {
                     <TextInput 
                         placeholderTextColor="#c1bccc"
                         style={styles.input}
+                        value={formData.email}
+                        onChangeText={value=>setFormData({...formData, email: value})}
                         placeholder="E-mail"
                     />
                     <TextInput 
                         placeholderTextColor="#c1bccc"
                         style={styles.input}
+                        value={formData.password}
+                        onChangeText={value=>setFormData({...formData, password: value})}
                         placeholder="Senha"
                     />
                 </View>
 
                 <View style={styles.buttonView}>
-                	<RectButton onPress={goToSuccessPage} style={styles.button}>
+                	<RectButton onPress={handleSignUp} style={styles.button}>
                         <Text style={styles.buttonText}>Concluir cadastro</Text>
                     </RectButton>
                 </View>

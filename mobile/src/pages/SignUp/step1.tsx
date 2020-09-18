@@ -97,6 +97,11 @@ const styles = StyleSheet.create({
 function SignUpStep1() {
     const {navigate} = useNavigation()
     
+    const [formData, setFormData] = useState({
+        name: '',
+        surname: ''
+    })
+    
 
     useEffect(()=>{
         
@@ -107,7 +112,10 @@ function SignUpStep1() {
     }
 
     function goToStep2Page() {
-        navigate('SignUpStep2')
+        navigate('SignUpStep2',{
+            name: formData.name,
+            surname: formData.surname
+        })
     }
 
     return(
@@ -132,11 +140,15 @@ function SignUpStep1() {
                     <TextInput 
                         placeholderTextColor="#c1bccc"
                         style={styles.input}
+                        value={formData.name}
+                        onChangeText={value=>setFormData({...formData, name: value})}
                         placeholder="Nome"
                     />
                     <TextInput 
                         placeholderTextColor="#c1bccc"
                         style={styles.input}
+                        value={formData.surname}
+                        onChangeText={value=>setFormData({...formData, surname: value})}
                         placeholder="Sobrenome"
                     />
                 </View>
