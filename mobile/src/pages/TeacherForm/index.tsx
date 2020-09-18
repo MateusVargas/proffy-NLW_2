@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { View, Image, Text, ScrollView, ImageBackground, Picker, TextInput, TouchableOpacity, CheckBox, Platform, KeyboardAvoidingView } from 'react-native'
+import { View, Image, Text, ScrollView, ImageBackground, Picker, TextInput, ActivityIndicator, TouchableOpacity, CheckBox, Platform, KeyboardAvoidingView } from 'react-native'
 import {useNavigation} from '@react-navigation/native'
 import {RectButton, BorderlessButton} from 'react-native-gesture-handler'
 import PageHeader from '../../components/PageHeader'
@@ -8,14 +8,27 @@ import styles from './styles'
 import bgImage from '../../assets/images/give-classes-background.png'
 import {Feather} from '@expo/vector-icons'
 
+import api from '../../services/api'
+
+
 function TeacherForm(){
 
     const {navigate} = useNavigation()
 
+    const [loading, setLoading] = useState(false)
+
+    const [formData, setFormData] = useState({
+        name: '',
+        whatsapp: '',
+        avatar: '',
+        bio: '',
+        subject: '',
+        cost: ''
+    })
+
     const [schedules, setSchedule] = useState([
        {week_day: 0, from: '', to: ''}
-    ])
-    const [selectedDay, setSelectedDay] = useState('1')
+    ]) 
     
 
     useEffect(()=>{
@@ -29,18 +42,59 @@ function TeacherForm(){
         ])
     }
 
+    function setScheduleItemValue(position:number,field:string,value:string){
+        const newValues = schedules.map((sc,index)=>{
+            if(index === position){
+                return {
+                    ...sc,
+                    [field]: value
+                }
+            }
+            return sc
+        })
+        setSchedule(newValues)
+    }
+
     function removeSchedule(schedule: any){
         const filteredSchedules = schedules.filter(sc=>sc !== schedule)
         setSchedule(filteredSchedules)
     }
 
-    function goToSuccessPage() {
-        navigate('Success',{
-            title: 'Cadastro Salvo!',
-            description: 'Tudo certo, seu cadastro está na nossa lista de professores. Agora é só ficar de olho no seu WhatsApp',
-            buttonText: 'Fazer login',
-        })
+    async function handleCreateTeacher() {
+        setLoading(true)
+
+        const data = {
+            name: formData.name,
+            whatsapp: formData.whatsapp,
+            avatar: formData.avatar,
+            bio: formData.bio,
+            subject: formData.subject,
+            cost: formData.cost,
+            schedule: schedules
+        }
+        //console.log(data)
+        const response = await api.post('/classes',data)
+        if(response.status === 201){
+            navigate('Success',{
+                title: 'Cadastro Salvo!',
+                description: 'Tudo certo, seu cadastro está na nossa lista de professores. Agora é só ficar de olho no seu WhatsApp',
+                buttonText: 'Ir para home',
+                to: 'Landing'
+            })
+        }
+
+        setLoading(false)
     }
+
+
+    if(loading){
+        return(
+            <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
+                <ActivityIndicator size="large" color="#8257E5"/>
+            </View>
+        )
+    }
+
 
     return(
         <View style={styles.container}>
@@ -68,8 +122,9 @@ function TeacherForm(){
                                 Nome
                             </Text>
                             <TextInput 
-                                placeholderTextColor="#c1bccc"
                                 style={styles.input}
+                                value={formData.name}
+                                onChangeText={value=>setFormData({...formData, name: value})}
                             />
                         </View>
 
@@ -78,8 +133,9 @@ function TeacherForm(){
                                 Avatar
                             </Text>
                             <TextInput 
-                                placeholderTextColor="#c1bccc"
                                 style={styles.input}
+                                value={formData.avatar}
+                                onChangeText={value=>setFormData({...formData, avatar: value})}
                             />
                         </View>
 
@@ -88,8 +144,9 @@ function TeacherForm(){
                                 Whatsapp
                             </Text>
                             <TextInput 
-                                placeholderTextColor="#c1bccc"
                                 style={styles.input}
+                                value={formData.whatsapp}
+                                onChangeText={value=>setFormData({...formData, whatsapp: value})}
                             />
                         </View>
 
@@ -100,8 +157,9 @@ function TeacherForm(){
                             <TextInput
                                 multiline={true}
                                 numberOfLines={15} 
-                                placeholderTextColor="#c1bccc"
                                 style={styles.textarea}
+                                value={formData.bio}
+                                onChangeText={value=>setFormData({...formData, bio: value})}
                             />
                         </View>
 
@@ -114,8 +172,9 @@ function TeacherForm(){
                                 Matéria
                             </Text>
                             <TextInput 
-                                placeholderTextColor="#c1bccc"
                                 style={styles.input}
+                                value={formData.subject}
+                                onChangeText={value=>setFormData({...formData, subject: value})}
                             />
                         </View>
 
@@ -124,8 +183,9 @@ function TeacherForm(){
                                 Custo da sua hora por aula
                             </Text>
                             <TextInput 
-                                placeholderTextColor="#c1bccc"
                                 style={styles.input}
+                                value={formData.cost}
+                                onChangeText={value=>setFormData({...formData, cost: value})}
                             />
                         </View>
 
@@ -145,8 +205,8 @@ function TeacherForm(){
                                         Dia da semana
                                     </Text>
                                     <Picker
-                                        selectedValue={selectedDay}
-                                        onValueChange={(day,index)=>setSelectedDay(day)}
+                                        selectedValue={schedule.week_day}
+                                        onValueChange={value=>setScheduleItemValue(index,'week_day',value)}
                                         style={styles.input}
                                     >
                                         <Picker.Item label="Domingo" value="0"/>
@@ -165,7 +225,9 @@ function TeacherForm(){
                                             De
                                         </Text>
                                         <TextInput 
-                                            placeholderTextColor="#c1bccc"                                            style={styles.inlineInput}
+                                            value={schedule.from}
+                                            onChangeText={value=>setScheduleItemValue(index,'from',value)}
+                                            style={styles.inlineInput}
                                         />
                                     </View>
                                     <View style={styles.containerInlineArea}>
@@ -173,7 +235,8 @@ function TeacherForm(){
                                             Até
                                         </Text>
                                         <TextInput 
-                                            placeholderTextColor="#c1bccc"
+                                            value={schedule.to}
+                                            onChangeText={value=>setScheduleItemValue(index,'to',value)}
                                             style={styles.inlineInput}
                                         />
                                     </View>
@@ -196,7 +259,7 @@ function TeacherForm(){
                         })}
 
                         <View style={styles.buttonView}>
-                            <RectButton onPress={goToSuccessPage} style={styles.button}>
+                            <RectButton onPress={handleCreateTeacher} style={styles.button}>
                                 <Text style={styles.buttonText}>Salvar alterações</Text>
                             </RectButton>
                         </View>

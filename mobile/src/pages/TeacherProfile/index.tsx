@@ -10,6 +10,13 @@ import {Feather} from '@expo/vector-icons'
 
 function Profile() {
     const {navigate} = useNavigation()
+
+    const [formData, setFormData] = useState({
+        whatsapp: '',
+        bio: '',
+        subject: '',
+        cost: ''
+    })
     
     const [schedules, setSchedule] = useState([
        {week_day: 0, from: '', to: ''}
@@ -66,6 +73,8 @@ function Profile() {
                             </Text>
                             <TextInput 
                                 style={styles.input}
+                                value={formData.whatsapp}
+                                onChangeText={value=>setFormData({...formData, whatsapp: value})}
                             />
                         </View>
 
@@ -77,6 +86,8 @@ function Profile() {
                                 multiline={true}
                                 numberOfLines={15} 
                                 style={styles.textarea}
+                                value={formData.bio}
+                                onChangeText={value=>setFormData({...formData, bio: value})}
                             />
                         </View>
 
@@ -90,6 +101,8 @@ function Profile() {
                             </Text>
                             <TextInput 
                                 style={styles.input}
+                                value={formData.subject}
+                                onChangeText={value=>setFormData({...formData, subject: value})}
                             />
                         </View>
 
@@ -99,6 +112,8 @@ function Profile() {
                             </Text>
                             <TextInput 
                                 style={styles.input}
+                                value={formData.cost}
+                                onChangeText={value=>setFormData({...formData, cost: value})}
                             />
                         </View>
 

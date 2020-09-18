@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, Image, Text, ImageBackground, TextInput, CheckBox, Platform, KeyboardAvoidingView } from 'react-native'
+import { View, Image, Text, ImageBackground, TextInput, CheckBox, Alert, ActivityIndicator, Platform, KeyboardAvoidingView } from 'react-native'
 import {useNavigation} from '@react-navigation/native'
 import {RectButton} from 'react-native-gesture-handler'
 
@@ -12,6 +12,8 @@ import { useAuth } from '../../contexts/auth'
 
 function SignIn() {
     const {navigate} = useNavigation()
+
+    const [loading, setLoading] = useState(false)
     
     const [formData, setFormData] = useState({
        email: '',
@@ -25,16 +27,35 @@ function SignIn() {
     }
 
     async function handleSignIn(){
-        const data = {
-            email: formData.email,
-            password: formData.password
+        if(formData.email.trim().length === 0){
+            Alert.alert('E-mail é obrigatório')
+            return
         }
-        await signIn(data)
+        else if(formData.password.trim().length === 0){
+            Alert.alert('Informe a senha')
+        }
+        else{
+            const data = {
+                email: formData.email,
+                password: formData.password
+            }
+            await signIn(data)
+        }
     }
 
     function goToRecoveryPassword(){
         navigate('RecoveryPassword')
     }
+
+
+    if(loading){
+        return(
+            <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
+                <ActivityIndicator size="large" color="#8257E5"/>
+            </View>
+        )
+    }
+
 
     return(
         <View style={styles.container}>

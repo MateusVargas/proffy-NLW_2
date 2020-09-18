@@ -19,7 +19,7 @@ function SuccessPage(){
     },[])
 
     function goToNextPage() {
-        navigate('SignIn')
+        navigate(route.params.to)
     }
 
     return(
