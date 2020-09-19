@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { View, Image, Text, ScrollView, ImageBackground, Picker, TextInput, ActivityIndicator, TouchableOpacity, CheckBox, Platform, KeyboardAvoidingView } from 'react-native'
+import { View, Image, Text, ScrollView, ImageBackground, Alert, Picker, TextInput, ActivityIndicator, TouchableOpacity, CheckBox, Platform, KeyboardAvoidingView } from 'react-native'
 import {useNavigation} from '@react-navigation/native'
 import {RectButton, BorderlessButton} from 'react-native-gesture-handler'
 import PageHeader from '../../components/PageHeader'
@@ -15,7 +15,9 @@ function TeacherForm(){
 
     const {navigate} = useNavigation()
 
-    const [loading, setLoading] = useState(false)
+    const [isRedirect, setIsRedirect] = useState(false)
+
+    const [loading, setLoading] = useState(true)
 
     const [formData, setFormData] = useState({
         name: '',
@@ -32,7 +34,18 @@ function TeacherForm(){
     
 
     useEffect(()=>{
-        
+        async function getTeacher(){
+            try{
+                const response = await api.get('/classes-profile')
+                if(response.data.length !== 0){
+                    setIsRedirect(true)
+                }
+            }catch(error){
+                Alert.alert('Não foi possível buscar os dados')
+            }
+            setLoading(false)
+        }
+        getTeacher()
     },[])
 
     function addSchedule(){
@@ -93,6 +106,10 @@ function TeacherForm(){
                 <ActivityIndicator size="large" color="#8257E5"/>
             </View>
         )
+    }
+
+    if(isRedirect){
+        navigate('Profile')
     }
 
 
