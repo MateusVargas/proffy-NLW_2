@@ -6,6 +6,7 @@ import {RectButton} from 'react-native-gesture-handler'
 import styles from './styles'
 
 import bgImage from '../../assets/images/give-classes-background.png'
+import logo from '../../assets/images/others/intro.png'
 
 import { useAuth } from '../../contexts/auth'
 
@@ -61,8 +62,8 @@ function SignIn() {
         <View style={styles.container}>
             <View style={styles.top}>
             	<ImageBackground resizeMode="contain" source={bgImage} style={styles.top}>
-                    <Text style={styles.textTop}>Sua plataforma de estudos online.</Text>
-            	</ImageBackground>
+                    <Image source={logo}/>
+                </ImageBackground>
             </View>
 
 

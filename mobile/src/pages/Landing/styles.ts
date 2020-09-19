@@ -10,6 +10,12 @@ const styles = StyleSheet.create({
         backgroundColor: '#8257E5',
         padding: 40
     },
+    exit: {
+        backgroundColor: '#6b42cc',
+        marginTop: 5,
+        padding: 6,
+        borderRadius: 10
+    },
     banner: {
         width: '100%',
         resizeMode: 'contain'//redimensiona conforme altura e largura, deixando visível toda a foto

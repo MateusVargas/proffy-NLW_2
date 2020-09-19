@@ -115,7 +115,8 @@ function SignUpStep2() {
                 navigate('Success',{
                     title: 'Cadastro concluído',
                     description: 'Agora você faz parte da plataforma da Proffy',
-                    buttonText: 'Fazer login'
+                    buttonText: 'Fazer login',
+                    to: 'SignIn'
                 })
             }
         }

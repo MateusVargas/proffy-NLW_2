@@ -8,6 +8,8 @@ import landingImg from '../../assets/images/landing.png'
 import studyIcon from '../../assets/images/icons/study.png'
 import giveClassesIcon from '../../assets/images/icons/give-classes.png'
 import heartIcon from '../../assets/images/icons/heart.png'
+import exitIcon from '../../assets/images/others/exit.png'
+
 import api from '../../services/api'
 
 import { useAuth } from '../../contexts/auth'
@@ -39,8 +41,8 @@ function Landing() {
             <View style={styles.top}>
                 <View style={styles.topbar}>
                     <Text style={{color: '#fff'}}>{user?.name}</Text>
-                    <TouchableOpacity onPress={handleSignOut}>
-                        <Text style={{color: '#fff'}}>Sair</Text>
+                    <TouchableOpacity style={styles.exit} onPress={handleSignOut}>
+                        <Image source={exitIcon}/>
                     </TouchableOpacity>
                 </View>
                 <Image source={landingImg} style={styles.banner}/>
