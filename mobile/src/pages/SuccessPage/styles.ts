@@ -5,10 +5,12 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#8257E5',
         justifyContent: 'center',
-        alignItems: 'center'
+        padding: 40
     },
-    info:{
-        flex: 4
+    content: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     textBig: {
         fontFamily: 'Archivo_700Bold',
@@ -20,26 +22,18 @@ const styles = StyleSheet.create({
     },
     textSmall: {
         fontFamily: 'Poppins_400Regular',
-        fontSize: 13,
+        fontSize: 14,
+        lineHeight: 20,
         color: '#fff',
         maxWidth: 250,
         textAlign: 'center'
     },
 
-    bottom: {
-        flex: 1
-    },
-    buttonView: {
-        alignItems: 'center',
-        marginBottom: 10
-    },
     button: {
-        height: 55,
-        width: '100%',
+        height: 58,
         backgroundColor: '#04d361',
         borderRadius: 8,
-        padding: 24,
-        marginTop: 20,
+        marginVertical: 40,
         justifyContent: 'center',
         alignItems: 'center'
     },

@@ -21,23 +21,15 @@ function SuccessPage(){
 
     return(
         <View style={styles.container}>
-           
-           <View style={styles.info}>
-                <ImageBackground resizeMode="contain" source={bgImage} style={styles.container}>
-                    <Image source={successIcon}/>
-                    <Text style={styles.textBig}>{route.params.title}</Text>
-                    <Text style={styles.textSmall}>{route.params.description}</Text>
-                </ImageBackground>
-            </View>
+            <ImageBackground resizeMode="contain" source={bgImage} style={styles.content}>
+                <Image source={successIcon}/>
+                <Text style={styles.textBig}>{route.params.title}</Text>
+                <Text style={styles.textSmall}>{route.params.description}</Text>
+            </ImageBackground>
 
-            <View style={styles.bottom}>
-                <View style={styles.buttonView}>
-                    <RectButton onPress={goToNextPage} style={styles.button}>
-                        <Text style={styles.buttonText}>{route.params.buttonText}</Text>
-                    </RectButton>
-                </View>
-            </View>
- 
+            <RectButton onPress={goToNextPage} style={styles.button}>
+                <Text style={styles.buttonText}>{route.params.buttonText}</Text>
+            </RectButton>
         </View>
     )
 }

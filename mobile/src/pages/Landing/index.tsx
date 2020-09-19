@@ -29,8 +29,8 @@ function Landing() {
         await signOut()
     }
 
-    function goToGiveClasses(){
-        navigate('GiveClasses')
+    function goToTeacherForm(){
+        navigate('TeacherForm')
     }
     function goToStudyPages() {
         navigate('Study')
@@ -59,7 +59,7 @@ function Landing() {
                         <Image source={studyIcon}/>
                         <Text style={styles.buttonText}>Estudar</Text>
                     </RectButton>
-                    <RectButton onPress={goToGiveClasses} style={[styles.button, styles.buttonSecondary]}>
+                    <RectButton onPress={goToTeacherForm} style={[styles.button, styles.buttonSecondary]}>
                         <Image source={giveClassesIcon}/>
                         <Text style={styles.buttonText}>Dar aulas</Text>
                     </RectButton>
