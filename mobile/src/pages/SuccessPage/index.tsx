@@ -1,14 +1,12 @@
 import React from 'react'
 import { View, Image, ImageBackground, Text, TextInput, CheckBox, Platform, KeyboardAvoidingView } from 'react-native'
-import {useNavigation} from '@react-navigation/native'
+import {useNavigation, useRoute} from '@react-navigation/native'
 import {RectButton} from 'react-native-gesture-handler'
 import {BorderlessButton} from 'react-native-gesture-handler'
 import styles from './styles'
 
 import bgImage from '../../assets/images/give-classes-background.png'
 import successIcon from '../../assets/images/others/done.png'
-
-import {useRoute} from '@react-navigation/native'
 
 
 function SuccessPage(){

@@ -31,7 +31,7 @@ const TeacherItem: React.FC<TeacherItemProps> = ({teacher,favorited}) => {
 
     function openWhatsApp() {
         api.post('/connections',{
-            user_id: teacher.id
+            proffy_id: teacher.id
         })
         Linking.openURL(`whatsapp://send?phone=${teacher.whatsapp}`)
     }

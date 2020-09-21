@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { View, Image, Text, Picker, ScrollView, TouchableOpacity, ImageBackground, TextInput, CheckBox, Platform, KeyboardAvoidingView } from 'react-native'
+import { View, Image, Text, Picker, ScrollView, ActivityIndicator, Alert, TouchableOpacity, ImageBackground, TextInput, CheckBox, Platform, KeyboardAvoidingView } from 'react-native'
 import {useNavigation} from '@react-navigation/native'
 import {RectButton, BorderlessButton} from 'react-native-gesture-handler'
 import PageHeader from '../../components/PageHeader'
@@ -8,8 +8,23 @@ import styles from './styles'
 import bgImage from '../../assets/images/give-classes-background.png'
 import {Feather} from '@expo/vector-icons'
 
+import api from '../../services/api'
+
+interface Teacher{
+    id: number
+    name: string
+    avatar: string
+    whatsapp: string
+    bio: string
+    subject: string
+    cost: string
+}
+
 function Profile() {
     const {navigate} = useNavigation()
+    const [loading, setLoading] = useState(true)
+
+    const [teacher, setTeacher] = useState({} as Teacher)
 
     const [formData, setFormData] = useState({
         whatsapp: '',
@@ -21,10 +36,21 @@ function Profile() {
     const [schedules, setSchedule] = useState([
        {week_day: 0, from: '', to: ''}
     ])
-    const [selectedDay, setSelectedDay] = useState('1')
 
     useEffect(()=>{
-        
+        async function getTeacher(){
+            try{
+                const response = await api.get('/classes-profile')
+                if(response.data.length !== 0){
+                    setTeacher(response.data[0])
+                    setSchedule(response.data[0].schedule)
+                }
+            }catch(error){
+                Alert.alert('Não foi possível buscar os dados')
+            }
+            setLoading(false)
+        }
+        getTeacher()
     },[])
 
     function addSchedule(){
@@ -32,6 +58,19 @@ function Profile() {
             ...schedules,
             {week_day: 0, from: '', to: ''}
         ])
+    }
+
+    function setScheduleItemValue(position:number,field:string,value:string){
+        const newValues = schedules.map((sc,index)=>{
+            if(index === position){
+                return {
+                    ...sc,
+                    [field]: value
+                }
+            }
+            return sc
+        })
+        setSchedule(newValues)
     }
 
     function removeSchedule(schedule: any){
@@ -43,14 +82,46 @@ function Profile() {
         navigate('TeacherForm')
     }
 
+    async function handleUpdate() {
+        setLoading(true)
+        try{
+            const data = {
+                ...teacher,
+                schedule: schedules
+            }
+            const response = await api.put('/classes-profile',data)
+            if(response.status === 204){
+                navigate('Success',{
+                    title: 'Cadastro Atualizado!',
+                    description: 'Tudo certo, você atualizou o seu cadastro. Agora é só ficar de olho no seu WhatsApp',
+                    buttonText: 'Ir para home',
+                    to: 'Landing'
+                })
+            }
+            setLoading(false)
+        }catch(error){
+            console.log(error)
+            setLoading(false)
+        }
+    }
+
+    if(loading){
+        return(
+            <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
+                <ActivityIndicator size="large" color="#8257E5"/>
+            </View>
+        )
+    }
+
+
     return(
         <View style={styles.container}>
             <PageHeader 
                 topBarTitle="Meu perfil"
                 profileData={{
-                    subject: 'Geografia',
-                    avatar: 'https://avatars1.githubusercontent.com/u/50881853?s=460&u=66d473275230b8374d5a1856f17996fcd4b13400&v=4',
-                    name: 'joao'
+                    subject: teacher.subject,
+                    avatar: teacher.avatar,
+                    name: teacher.name
                 }}
             />
 
@@ -73,8 +144,8 @@ function Profile() {
                             </Text>
                             <TextInput 
                                 style={styles.input}
-                                value={formData.whatsapp}
-                                onChangeText={value=>setFormData({...formData, whatsapp: value})}
+                                value={teacher.whatsapp}
+                                onChangeText={value=>setTeacher({...teacher, whatsapp: value})}
                             />
                         </View>
 
@@ -86,8 +157,8 @@ function Profile() {
                                 multiline={true}
                                 numberOfLines={15} 
                                 style={styles.textarea}
-                                value={formData.bio}
-                                onChangeText={value=>setFormData({...formData, bio: value})}
+                                value={teacher.bio}
+                                onChangeText={value=>setTeacher({...teacher, bio: value})}
                             />
                         </View>
 
@@ -101,8 +172,8 @@ function Profile() {
                             </Text>
                             <TextInput 
                                 style={styles.input}
-                                value={formData.subject}
-                                onChangeText={value=>setFormData({...formData, subject: value})}
+                                value={teacher.subject}
+                                onChangeText={value=>setTeacher({...teacher, subject: value})}
                             />
                         </View>
 
@@ -110,10 +181,11 @@ function Profile() {
                             <Text style={styles.containerFieldText}>
                                 Custo da sua hora por aula
                             </Text>
-                            <TextInput 
+                            <TextInput
                                 style={styles.input}
-                                value={formData.cost}
-                                onChangeText={value=>setFormData({...formData, cost: value})}
+                                value={String(teacher.cost)}
+                                keyboardType="numeric"
+                                onChangeText={value=>setTeacher({...teacher, cost: value})}
                             />
                         </View>
 
@@ -133,8 +205,8 @@ function Profile() {
                                     Dia da semana
                                 </Text>
                                 <Picker
-                                    selectedValue={selectedDay}
-                                    onValueChange={(day,index)=>setSelectedDay(day)}
+                                    selectedValue={String(schedule.week_day)}
+                                    onValueChange={value=>setScheduleItemValue(index,'week_day',value)}
                                     style={styles.input}
                                 >
                                     <Picker.Item label="Domingo" value="0"/>
@@ -154,7 +226,9 @@ function Profile() {
                                         De
                                     </Text>
                                     <TextInput 
-                                       style={styles.inlineInput}                                           style={styles.inlineInput}
+                                       value={schedule.from}
+                                       onChangeText={value=>setScheduleItemValue(index,'from',value)}
+                                       style={styles.inlineInput}
                                      />
                                 </View>
                                     <View style={styles.containerInlineArea}>
@@ -162,6 +236,8 @@ function Profile() {
                                             Até
                                         </Text>
                                         <TextInput 
+                                            value={schedule.to}
+                                            onChangeText={value=>setScheduleItemValue(index,'to',value)}
                                             style={styles.inlineInput}
                                         />
                                     </View>
@@ -183,7 +259,7 @@ function Profile() {
                         })}
 
                         <View style={styles.buttonView}>
-                            <RectButton onPress={goToFormPage} style={styles.button}>
+                            <RectButton onPress={handleUpdate} style={styles.button}>
                                 <Text style={styles.buttonText}>Salvar alterações</Text>
                             </RectButton>
                         </View>

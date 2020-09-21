@@ -22,7 +22,7 @@ const TeacherItem:React.FC<TeacherItemProps> = ({teacher}) => {
 
     function createNewConnection() {
         apiPost('connections',{
-            user_id: teacher.id
+            proffy_id: teacher.id
         })
     }
 

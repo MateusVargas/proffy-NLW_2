@@ -8,8 +8,8 @@ export default class ConnectionsController{
         return res.json({total})
     }
     async create(req: Request, res: Response){
-        const { user_id } = req.body
-        await db('connections').insert({user_id})
+        const { proffy_id } = req.body
+        await db('connections').insert({proffy_id})
         return res.status(201).send()
     }
 }
