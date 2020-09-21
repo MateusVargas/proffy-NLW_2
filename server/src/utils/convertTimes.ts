@@ -15,8 +15,14 @@ export function convertMinutesToHours(time: string){
         }
         return roundHours + ":" + roundMinutes + "0"
     }
-    else if(roundHours < 10 && roundMinutes !== 0){
+    else if(roundHours < 10 && roundMinutes >= 10){
         return "0" + roundHours + ":" + roundMinutes
+    }
+    else if(roundHours < 10 && roundMinutes < 10){
+        return "0" + roundHours + ":" + "0" + roundMinutes
+    }
+    else if(roundHours >= 10 && roundMinutes < 10){
+        return roundHours + ":" + "0" + roundMinutes
     }
     return roundHours + ":" + roundMinutes
 }
