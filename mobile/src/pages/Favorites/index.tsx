@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import {View, ScrollView,Image} from 'react-native'
+import {View, ScrollView, Image, Text} from 'react-native'
 import styles from './styles'
 import PageHeader from '../../components/PageHeader'
 import TeacherItem, { Teacher } from '../../components/TeacherItem'
@@ -8,6 +8,9 @@ import AsyncStorage from '@react-native-community/async-storage'
 import { useFocusEffect } from '@react-navigation/native'
 
 import favoriteIcon from '../../assets/images/others/favorite.png'
+
+import api from '../../services/api'
+
 
 function Favorites(){
 

@@ -216,7 +216,7 @@ function TeacherForm(){
 
                         {schedules.map((schedule,index)=>{
                         return(
-                            <View key={schedule.week_day} style={styles.schedules}>
+                            <View key={index} style={styles.schedules}>
                                 <View style={styles.containerField}>
                                     <Text style={styles.containerFieldText}>
                                         Dia da semana

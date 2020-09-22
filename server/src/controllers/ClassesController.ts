@@ -23,7 +23,6 @@ export default class ClassesController {
 
         const proffys = await db('proffy')
         .join('classes','classes.proffy_id','=','proffy.id')
-        .join('class_schedule','classes.id','=','class_schedule.class_id')
         .groupBy('proffy.id')
         .where('proffy.account_id','=',accountId)
         .select(['proffy.*','classes.id as classid','classes.*'])
@@ -34,24 +33,27 @@ export default class ClassesController {
         .where('proffy.account_id','=',accountId)
         .select('class_schedule.*')
 
-        const schedule = schedules.map((scheduleItem: ScheduleItem) => {
-            return {
-             //   id: scheduleItem.id,
-                week_day: scheduleItem.week_day,
-                from: convertMinutesToHours(scheduleItem.from),
-                to: convertMinutesToHours(scheduleItem.to),
-                class_id: scheduleItem.class_id
-            }
-        })
+        if(schedules.length !== 0){
+            const schedule = schedules.map((scheduleItem: ScheduleItem) => {
+                return {
+                 //   id: scheduleItem.id,
+                    week_day: scheduleItem.week_day,
+                    from: convertMinutesToHours(scheduleItem.from),
+                    to: convertMinutesToHours(scheduleItem.to),
+                    class_id: scheduleItem.class_id
+                }
+            })
 
-        const serializedProffys = proffys.map(proffy=>{
-            return{
-                ...proffy,
-                schedule
-            }
-        })
-        console.log(schedules)
-        return res.status(200).json(serializedProffys)
+            const serializedProffys = proffys.map(proffy=>{
+                return{
+                    ...proffy,
+                    schedule
+                }
+            })
+            return res.status(200).json(serializedProffys)
+        }
+        
+        return res.status(200).json(proffys)
     }
 
     async index (req: Request, res: Response){
@@ -198,6 +200,14 @@ export default class ClassesController {
 
             //await transaction('class_schedule').update(classSchedule)
             //.where('class_schedule.class_id',1)
+            if (classSchedule.length === 0) {
+                await transaction('class_schedule')
+                .delete()
+                .where('class_schedule.class_id',classid)
+
+                transaction.commit()
+                return res.status(204).send()
+            }
             
             await transaction('class_schedule')
             .delete()

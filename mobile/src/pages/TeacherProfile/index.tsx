@@ -20,6 +20,12 @@ interface Teacher{
     cost: string
 }
 
+interface Schedules{
+    week_day: number
+    from: string
+    to: string
+}
+
 function Profile() {
     const {navigate} = useNavigation()
     const [loading, setLoading] = useState(true)
@@ -33,9 +39,7 @@ function Profile() {
         cost: ''
     })
     
-    const [schedules, setSchedule] = useState([
-       {week_day: 0, from: '', to: ''}
-    ])
+    const [schedules, setSchedule] = useState([{} as Schedules])
 
     useEffect(()=>{
         async function getTeacher(){
@@ -43,7 +47,12 @@ function Profile() {
                 const response = await api.get('/classes-profile')
                 if(response.data.length !== 0){
                     setTeacher(response.data[0])
-                    setSchedule(response.data[0].schedule)
+                    if(response.data[0].schedule){
+                        setSchedule(response.data[0].schedule)
+                    }
+                    else{
+                        setSchedule([])
+                    }
                 }
             }catch(error){
                 Alert.alert('Não foi possível buscar os dados')
@@ -54,10 +63,17 @@ function Profile() {
     },[])
 
     function addSchedule(){
-        setSchedule([
-            ...schedules,
-            {week_day: 0, from: '', to: ''}
-        ])
+        if(schedules.length !== 0){
+            setSchedule([
+                ...schedules,
+                {week_day: 0, from: '', to: ''}
+            ])
+        }
+        else{
+            setSchedule([
+                {week_day: 0, from: '', to: ''}
+            ])
+        }
     }
 
     function setScheduleItemValue(position:number,field:string,value:string){
@@ -199,7 +215,7 @@ function Profile() {
 
                         {schedules.map((schedule,index)=>{
                         return(
-                        <View key={schedule.week_day} style={styles.schedules}>
+                        <View key={index} style={styles.schedules}>
                             <View style={styles.containerField}>
                                 <Text style={styles.containerFieldText}>
                                     Dia da semana
