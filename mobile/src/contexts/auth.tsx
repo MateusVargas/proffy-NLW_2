@@ -14,7 +14,7 @@ interface AuthContextTypes{
     signed: boolean
     user: User | null
     loading: boolean
-    signIn(data: any): Promise<void>
+    signIn(data: any, remember: boolean): Promise<void>
     signOut(): void
 }
 
@@ -39,16 +39,35 @@ export const AuthProvider: React.FC = ({children}) => {
         loadStorageUser()
     },[])
 
-    async function signIn(data: any){
+    async function signIn(data: any, remember:boolean){
         try{
             setLoading(true)
+            if(remember){
+                await AsyncStorage.multiSet(
+                    [
+                        ['email',JSON.stringify(data.email)],
+                        ['password',JSON.stringify(data.password)]
+                    ]
+                )
+            }
+            else{
+                const email = await AsyncStorage.getItem('email')
+                const password = await AsyncStorage.getItem('password')
+
+                if(email && password){
+                     AsyncStorage.multiRemove(['email','password'])
+                }
+            }
+
             const response = await api.post('/sign-in',data)
+
             if(response.status === 200){
                 setUser(response.data.account)
                 await AsyncStorage.setItem('user',JSON.stringify(response.data.account))
                 await AsyncStorage.setItem('token',response.data.metadata.token)
                 api.defaults.headers.Authorization = `Bearer ${response.data.metadata.token}`  
             }
+            
             setLoading(false)
         }catch(error){
             Alert.alert('Usuário ou senha incorretos')
@@ -57,7 +76,7 @@ export const AuthProvider: React.FC = ({children}) => {
     }
 
     function signOut(){
-        AsyncStorage.clear().then(()=>{
+        AsyncStorage.multiRemove(['token','user']).then(()=>{
             setUser(null)
         })
     }

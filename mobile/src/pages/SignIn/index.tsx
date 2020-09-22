@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { View, Image, Text, ImageBackground, TextInput, CheckBox, Alert, ActivityIndicator, Platform, KeyboardAvoidingView } from 'react-native'
+import React, { useState, useEffect } from 'react'
+import { View, Image, Text, AsyncStorage, ImageBackground, TextInput, CheckBox, Alert, ActivityIndicator, Platform, KeyboardAvoidingView } from 'react-native'
 import {useNavigation} from '@react-navigation/native'
 import {RectButton} from 'react-native-gesture-handler'
 
@@ -20,8 +20,27 @@ function SignIn() {
        email: '',
        password: ''
     })
+    const [isRemember, setIsRemember] = useState(false)
 
     const { signed, signIn } = useAuth()
+
+    useEffect(()=>{
+        async function getRememberData(){
+            setLoading(true)
+            const email = await AsyncStorage.getItem('email')
+            const password = await AsyncStorage.getItem('password')
+
+            if(email && password){
+                setFormData({
+                    email: JSON.parse(email),
+                    password: JSON.parse(password)
+                }) 
+                setIsRemember(!isRemember)
+            }
+            setLoading(false)
+        }
+        getRememberData()
+    },[])
 
     function goToSignUpPages() {
         navigate('SignUpStep1')
@@ -40,7 +59,7 @@ function SignIn() {
                 email: formData.email,
                 password: formData.password
             }
-            await signIn(data)
+            await signIn(data, isRemember)
         }
     }
 
@@ -97,7 +116,10 @@ function SignIn() {
 
                 <View style={styles.options}>
                     <View style={styles.viewCheckbox}>
-                        <CheckBox/>
+                        <CheckBox
+                            value={isRemember}
+                            onValueChange={value=>{setIsRemember(!isRemember)}}
+                        />
                         <Text style={styles.textOptions}>Lembrar-me</Text>
                     </View>
                     <Text onPress={goToRecoveryPassword} style={styles.textOptions}>
