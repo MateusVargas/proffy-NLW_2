@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { View, Image, Text, AsyncStorage, ImageBackground, TextInput, CheckBox, Alert, ActivityIndicator, Platform, KeyboardAvoidingView } from 'react-native'
+import { View, Image, Text, ImageBackground, TextInput, CheckBox, Alert, ActivityIndicator, Platform, KeyboardAvoidingView } from 'react-native'
 import {useNavigation} from '@react-navigation/native'
 import {RectButton} from 'react-native-gesture-handler'
 
@@ -10,6 +10,7 @@ import logo from '../../assets/images/others/intro.png'
 
 import { useAuth } from '../../contexts/auth'
 
+import AsyncStorage from '@react-native-community/async-storage'
 
 function SignIn() {
     const {navigate} = useNavigation()
