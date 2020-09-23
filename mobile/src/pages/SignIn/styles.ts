@@ -11,14 +11,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center'
     },
-    textTop: {
-        fontFamily: 'Poppins_400Regular',
-        fontSize: 20,
-        color: '#fff',
-        maxWidth: 300
-    },
-
-
     bottom: {
         flex: 1,
         backgroundColor: '#fff',

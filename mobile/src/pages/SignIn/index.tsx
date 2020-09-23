@@ -5,7 +5,7 @@ import {RectButton} from 'react-native-gesture-handler'
 
 import styles from './styles'
 
-import bgImage from '../../assets/images/give-classes-background.png'
+import bgImage from '../../assets/images/others/background.png'
 import logo from '../../assets/images/others/intro.png'
 
 import { useAuth } from '../../contexts/auth'
@@ -80,12 +80,9 @@ function SignIn() {
 
     return(
         <View style={styles.container}>
-            <View style={styles.top}>
-            	<ImageBackground resizeMode="contain" source={bgImage} style={styles.top}>
-                    <Image source={logo}/>
-                </ImageBackground>
-            </View>
-
+          	<ImageBackground resizeMode="center" source={bgImage} style={styles.top}>
+                <Image source={logo}/>
+            </ImageBackground>
 
             <View style={styles.bottom}>
                 <View style={styles.header}>

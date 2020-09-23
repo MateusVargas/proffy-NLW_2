@@ -2,8 +2,8 @@ import React from 'react'
 import { View, Image, Text, StyleSheet, ImageBackground, TouchableOpacity } from 'react-native'
 import {useNavigation} from '@react-navigation/native'
 
-import bgImage from '../../assets/images/give-classes-background.png'
-import classIcon from '../../assets/images/others/aulas.png'
+import bgImage from '../../assets/images/others/background.png'
+import Icon from '../../assets/images/others/study.png'
 import currentPageIcon from '../../assets/images/others/currentpage.png'
 import nextIcon from '../../assets/images/others/next.png'
 
@@ -11,7 +11,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#8257E5',
-        justifyContent: 'center',
     },
     top: {
         flex: 1,
@@ -53,11 +52,9 @@ function ScreenOne() {
 
     return(
         <View style={styles.container}>
-            <View style={styles.top}>
-            	<ImageBackground resizeMode="contain" source={bgImage} style={styles.top}>
-                    <Image source={classIcon}/>
-            	</ImageBackground>
-            </View>
+            <ImageBackground resizeMode="center" source={bgImage} style={styles.top}>
+                <Image source={Icon}/>
+          	</ImageBackground>
 
             <View style={styles.bottom}>
             	<Text style={styles.number}>01.</Text>

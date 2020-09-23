@@ -41,7 +41,7 @@ function Landing() {
             <View style={styles.top}>
                 <View style={styles.topbar}>
                     <Text style={{color: '#fff'}}>{user?.name}</Text>
-                    <TouchableOpacity style={styles.exit} onPress={handleSignOut}>
+                    <TouchableOpacity onPress={handleSignOut}>
                         <Image source={exitIcon}/>
                     </TouchableOpacity>
                 </View>

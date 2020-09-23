@@ -2,8 +2,8 @@ import React from 'react'
 import { View, Image, Text, StyleSheet, ImageBackground, TouchableOpacity } from 'react-native'
 import {useNavigation} from '@react-navigation/native'
 
-import bgImage from '../../assets/images/give-classes-background.png'
-import Icon from '../../assets/images/others/study.png'
+import bgImage from '../../assets/images/others/background.png'
+import classIcon from '../../assets/images/others/aulas.png'
 import currentPageIcon from '../../assets/images/others/currentpage.png'
 import nextIcon from '../../assets/images/others/next.png'
 
@@ -53,11 +53,9 @@ function ScreenTwo() {
 
     return(
         <View style={styles.container}>
-            <View style={styles.top}>
-            	<ImageBackground resizeMode="contain" source={bgImage} style={styles.top}>
-                    <Image source={Icon}/>
-            	</ImageBackground>
-            </View>
+          	<ImageBackground resizeMode="center" source={bgImage} style={styles.top}>
+                <Image source={classIcon}/>
+            </ImageBackground>
 
             <View style={styles.bottom}>
             	<Text style={styles.number}>02.</Text>
