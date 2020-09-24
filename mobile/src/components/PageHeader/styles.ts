@@ -3,6 +3,7 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
     container: {
         padding: 40,
+        justifyContent: 'flex-end',
         backgroundColor: '#8257e5'
     },
     topBar:{
@@ -24,8 +25,8 @@ const styles = StyleSheet.create({
         fontSize: 24,
         lineHeight: 24,
         maxWidth: 230,
-        marginVertical: 20,
-        marginTop: 20
+        marginVertical: 40,
+        marginTop: 20,
     },
     description:{
         fontFamily: 'Poppins_400Regular',

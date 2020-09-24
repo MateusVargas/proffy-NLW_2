@@ -10,8 +10,6 @@ const styles = StyleSheet.create({
     },
     searchForm:{
         justifyContent: 'flex-end',
-        marginBottom: 20,
-        marginTop: 15
     },
     label:{
         color: '#d4c2ff',

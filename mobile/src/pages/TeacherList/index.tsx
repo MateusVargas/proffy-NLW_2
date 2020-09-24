@@ -67,7 +67,7 @@ function TeacherList(){
                 )}
             >
                 { isFilterVisible && (
-                    <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"} style={styles.searchForm}>
+                    <View style={styles.searchForm}>
                         <Text style={styles.label}>Matéria</Text>
                         <TextInput 
                             placeholderTextColor="#c1bccc"
@@ -104,7 +104,7 @@ function TeacherList(){
                             <Text style={styles.submitButtonText}>Buscar</Text>
                         </RectButton>
 
-                    </KeyboardAvoidingView>
+                    </View>
                 )}
             </PageHeader>
 

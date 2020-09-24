@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react'
-import {View,Image,Text} from 'react-native'
+import {View,Image,Text,Platform,KeyboardAvoidingView} from 'react-native'
 import {BorderlessButton} from 'react-native-gesture-handler'
 
 import styles from './styles'
@@ -38,6 +38,7 @@ const PageHeader: React.FC<PageHeaderProps> = ({ title, description, topBarTitle
                 styles.container
             }
             >
+            
             <View style={styles.topBar}>
                 <BorderlessButton onPress={handleGoBack}>
                     <Image source={backIcon} resizeMode="contain"/>
@@ -46,8 +47,11 @@ const PageHeader: React.FC<PageHeaderProps> = ({ title, description, topBarTitle
                 <Image source={logo} resizeMode="contain"/>
             </View>
             
+
             <View style={profileData ? {justifyContent:'center',flexDirection: 'row',
         alignItems: 'center'} : styles.header}>
+        
+            <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"} style={styles.header}>
                 <View style={styles.info}>
                     <Text style={styles.title}>{title}</Text>
                     {description && 
@@ -63,7 +67,10 @@ const PageHeader: React.FC<PageHeaderProps> = ({ title, description, topBarTitle
                         <Text style={styles.subject}>{profileData.subject}</Text>
                     </View>
                 }
+
+                </KeyboardAvoidingView>
             </View>
+           
             {children}
         </View>
     )
