@@ -29,10 +29,11 @@ const AuthProvider: React.FC = ({children}) => {
             const response:any = await apiPost('sign-in',data)
             if(response.status === 200){
                 localStorage.setItem('token', JSON.stringify(response.data.metadata.token))
-                localStorage.setItem('username', JSON.stringify(response.data.account[0].name +" "+ response.data.account[0].surname))
+                localStorage.setItem('username', JSON.stringify(response.data.account.name +" "+ response.data.account.surname))
                 setAccount(response.data.account)
                 setLoading(false)
             }
+            setLoading(false)
         }catch(err){
             setLoading(false)
             console.log(err)
