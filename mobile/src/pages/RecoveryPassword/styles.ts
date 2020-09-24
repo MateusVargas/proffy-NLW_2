@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
         padding: 32,
     },
     backButton: {
-        marginBottom: 15
+        marginBottom: 10
     },
     header: {
         flexDirection: 'column',

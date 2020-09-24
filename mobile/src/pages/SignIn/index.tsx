@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { View, Image, Text, ImageBackground, TextInput, CheckBox, Alert, ActivityIndicator, Platform, KeyboardAvoidingView } from 'react-native'
+import { View, Image, Text, ImageBackground, TextInput, Alert, ActivityIndicator, Platform, KeyboardAvoidingView } from 'react-native'
+import CheckBox from '@react-native-community/checkbox';
 import {useNavigation} from '@react-navigation/native'
 import {RectButton} from 'react-native-gesture-handler'
 
@@ -117,6 +118,7 @@ function SignIn() {
                         <CheckBox
                             value={isRemember}
                             onValueChange={value=>{setIsRemember(!isRemember)}}
+                            tintColors={{true:'#04d361',false:'gray'}}
                         />
                         <Text style={styles.textOptions}>Lembrar-me</Text>
                     </View>
