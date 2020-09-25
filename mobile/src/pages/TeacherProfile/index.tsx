@@ -186,11 +186,26 @@ function Profile() {
                             <Text style={styles.containerFieldText}>
                                 Matéria
                             </Text>
-                            <TextInput 
+
+                            <Picker
+                                selectedValue={teacher.subject}
+                                onValueChange={value=>setTeacher({...teacher, subject: value})}
                                 style={styles.input}
-                                value={teacher.subject}
-                                onChangeText={value=>setTeacher({...teacher, subject: value})}
-                            />
+                            >
+                                <Picker.Item label="Biologia" value="Biologia"/>
+                                <Picker.Item label="Ciências" value="Ciências"/>
+                                <Picker.Item label="Educação física" value="Educação física"/>
+                                <Picker.Item label="Física" value="Física"/>
+                                <Picker.Item label="Filosofia" value="Filosofia"/>
+                                <Picker.Item label="Geografia" value="Geografia"/>
+                                <Picker.Item label="História" value="História"/>
+                                <Picker.Item label="Literatura" value="Literatura"/>
+                                <Picker.Item label="Matemática" value="Matemática"/>
+                                <Picker.Item label="Português" value="Português"/>
+                                <Picker.Item label="Química" value="Química"/>
+                                <Picker.Item label="Redação" value="Redação"/>
+                                <Picker.Item label="Sociologia" value="Sociologia"/>
+                            </Picker>
                         </View>
 
                         <View style={styles.containerField}>
