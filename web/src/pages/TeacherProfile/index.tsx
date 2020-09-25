@@ -10,6 +10,9 @@ import Select from '../../components/Select'
 import BackgroundImage from '../../assets/images/success-background.svg'
 import { apiGet, apiPut } from '../../services/api'
 
+import Successfully from '../../components/Successfully'
+
+
 interface Teacher{
     id: number
     name: string
@@ -20,20 +23,33 @@ interface Teacher{
     cost: string
 }
 
+interface Schedules{
+    week_day: number
+    from: string
+    to: string
+}
+
 function Profile(){
+
+    const [isDone,setIsDone] = useState(false)
 
     const [teacher, setTeacher] = useState<Teacher>({} as Teacher)
 
-    const [scheduleItems,setScheduleItems] = useState([
-        { week_day: 0, from: '', to: ''}
-    ])
+    const [scheduleItems,setScheduleItems] = useState([{} as Schedules])
 
     useEffect(()=>{
         async function getProfile(){
             try {
                 const response = await apiGet('classes-profile')
                 setTeacher(response.data[0])
-                setScheduleItems(response.data[0].schedule)
+                
+                if(response.data[0].schedule){
+                        setScheduleItems(response.data[0].schedule)
+                }
+                else{
+                    setScheduleItems([])
+                }
+
             } catch (error) {
                 console.log(error)
                 alert('não foi possível encontrar o perfil tente novamente')
@@ -43,10 +59,17 @@ function Profile(){
     },[])
 
     function addNewScheduleItem(){
-        setScheduleItems([
-            ...scheduleItems,
-            { week_day: 0, from: '', to: ''}
-        ])
+        if(scheduleItems.length !== 0){
+            setScheduleItems([
+                ...scheduleItems,
+                {week_day: 0, from: '', to: ''}
+            ])
+        }
+        else{
+            setScheduleItems([
+                {week_day: 0, from: '', to: ''}
+            ])
+        }
     }
 
     function removeScheduleItem(scheduleItem: any, index:number){
@@ -75,13 +98,23 @@ function Profile(){
         try {
             const response = await apiPut('classes-profile',data)
             if(response.status === 204){
-                alert('Atualizado com sucesso')
+                setIsDone(true)
             }
         } catch (error) {
             console.log(error)
             alert('Não foi possível cadastrar')
         }
     }
+
+
+    if(isDone){
+        return <Successfully 
+                title="Atualizado com Sucesso" 
+                description="Seu cadastro foi atualizado, agora é so ficar de olho no seu WhatsApp." 
+                textButton="Voltar" 
+                to='/home'/>
+    }
+
 
     return(
         <div id="page-teacher-profile" className="container">
@@ -145,7 +178,7 @@ function Profile(){
                         {scheduleItems.map((scheduleItem,index)=>{
                             return(
                                 <>
-                                    <div key={scheduleItem.week_day} className="schedule-item">
+                                    <div key={index} className="schedule-item">
                                         <Select 
                                             name="week_day"
                                             label="Dia da semana"

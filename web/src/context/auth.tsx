@@ -42,6 +42,8 @@ const AuthProvider: React.FC = ({children}) => {
     }
 
     function signOut(){
+        localStorage.removeItem('token')
+        localStorage.removeItem('username')
         setAccount(null)
     }
 

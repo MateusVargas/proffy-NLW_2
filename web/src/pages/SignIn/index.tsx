@@ -10,7 +10,7 @@ import './styles.css'
 import { Link } from 'react-router-dom'
 
 function Login(){
-    const {account,signed,signIn} = useContext(AuthContext)
+    const {signIn} = useContext(AuthContext)
 
     const [isPasswordVisible,setIsPasswordVisible] = useState(true)
 

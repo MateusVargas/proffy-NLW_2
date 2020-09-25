@@ -20,7 +20,7 @@
     max-width: 70%;
 }
 .info a{
-    width: 100%;
+    width: 30rem;
     height: 5.6rem;
     background: var(--color-secundary);
     color: var(--color-button-text);

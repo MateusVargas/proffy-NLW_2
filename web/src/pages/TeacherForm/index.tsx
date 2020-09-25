@@ -5,6 +5,7 @@ import Loading from '../../components/Loading'
 import './styles.css'
 
 import Input from '../../components/Input'
+import Successfully from '../../components/Successfully'
 
 import WarningIcon from '../../assets/images/icons/warning.svg'
 import RocketIcon from '../../assets/images/icons/rocket.svg'
@@ -21,6 +22,7 @@ function TeacherForm(){
 
     const [loading, setLoading] = useState(true)
     const [isRedirect,setIsRedirect] = useState(false)
+    const [isDone,setIsDone] = useState(false)
 
     const [name, setName] = useState('')
     const [avatar, setAvatar] = useState('')
@@ -80,8 +82,7 @@ function TeacherForm(){
         }).then((resp)=>{
             if(resp.status === 201){
                 setLoading(false)
-                alert('cadastro realizado com sucesso')
-                history.push('/home')
+                setIsDone(true)
             }
         }).catch(()=>{
             setLoading(false)
@@ -95,6 +96,14 @@ function TeacherForm(){
 
     if(isRedirect){
         return <Redirect to='/give-classes/profile'/>
+    }
+
+    if(isDone){
+        return <Successfully 
+                title="Cadastro Salvo!" 
+                description="Seu cadastro foi concluído, agora é so ficar de olho no seu WhatsApp." 
+                textButton="Ver Perfil" 
+                to='/give-classes/profile'/>
     }
 
     return(
@@ -159,7 +168,7 @@ function TeacherForm(){
 
                         {scheduleItems.map((scheduleItem,index)=>{
                             return(
-                                <div key={scheduleItem.week_day} className="schedule-item">
+                                <div key={index} className="schedule-item">
                                     <Select 
                                         name="week_day"
                                         label="Dia da semana"

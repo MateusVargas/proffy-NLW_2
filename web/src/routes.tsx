@@ -34,6 +34,8 @@ function Routes(){
     return(
         <BrowserRouter>
             <Switch>
+
+                <CustomRoutes path='/' exact><Redirect to='/sign-in' /></CustomRoutes>
                 <CustomRoutes path='/recovery-password'><RecoveryPassword/></CustomRoutes>
                 <CustomRoutes path='/sign-in'><SignIn/></CustomRoutes>
                 <CustomRoutes path='/sign-up'><SignUp/></CustomRoutes>
